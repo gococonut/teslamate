@@ -59,9 +59,7 @@
     {
       "asDropdown": true,
       "icon": "external link",
-      "tags": [
-        "tesla"
-      ],
+      "tags": ["tesla"],
       "title": "Dashboards",
       "type": "dashboards"
     }
@@ -129,9 +127,12 @@
       "maxDataPoints": 10000000,
       "options": {
         "basemap": {
-          "config": {},
+          "config": {
+            "url": "https://osm-proxy.fusever.com/{z}/{x}/{y}.png",
+            "attribution": "Map data &copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
+          },
           "name": "Layer 0",
-          "type": "osm-standard"
+          "type": "custom"
         },
         "controls": {
           "mouseWheelZoom": true,
@@ -314,9 +315,7 @@
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "/.*/",
           "values": true
         },
@@ -342,9 +341,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -452,18 +449,14 @@
       "options": {
         "colorMode": "value",
         "fieldOptions": {
-          "calcs": [
-            "mean"
-          ]
+          "calcs": ["mean"]
         },
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "vertical",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "",
           "values": true
         },
@@ -549,18 +542,14 @@
       "options": {
         "colorMode": "value",
         "fieldOptions": {
-          "calcs": [
-            "lastNotNull"
-          ]
+          "calcs": ["lastNotNull"]
         },
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": true
         },
@@ -585,9 +574,7 @@
           "select": [
             [
               {
-                "params": [
-                  "latitude"
-                ],
+                "params": ["latitude"],
                 "type": "column"
               }
             ]
@@ -626,9 +613,7 @@
   ],
   "refresh": false,
   "schemaVersion": 39,
-  "tags": [
-    "tesla"
-  ],
+  "tags": ["tesla"],
   "templating": {
     "list": [
       {
@@ -715,17 +700,7 @@
       "2h",
       "1d"
     ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
+    "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
   },
   "timezone": "",
   "title": "Visited",

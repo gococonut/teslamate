@@ -92,9 +92,7 @@
     {
       "asDropdown": true,
       "icon": "external link",
-      "tags": [
-        "tesla"
-      ],
+      "tags": ["tesla"],
       "title": "Dashboards",
       "type": "dashboards"
     }
@@ -148,18 +146,14 @@
       "options": {
         "colorMode": "value",
         "fieldOptions": {
-          "calcs": [
-            "mean"
-          ]
+          "calcs": ["mean"]
         },
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "",
           "values": false
         },
@@ -183,9 +177,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -237,18 +229,14 @@
       "options": {
         "colorMode": "value",
         "fieldOptions": {
-          "calcs": [
-            "mean"
-          ]
+          "calcs": ["mean"]
         },
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "",
           "values": false
         },
@@ -272,9 +260,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -327,18 +313,14 @@
       "options": {
         "colorMode": "value",
         "fieldOptions": {
-          "calcs": [
-            "mean"
-          ]
+          "calcs": ["mean"]
         },
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "",
           "values": false
         },
@@ -362,9 +344,7 @@
           "select": [
             [
               {
-                "params": [
-                  "latitude"
-                ],
+                "params": ["latitude"],
                 "type": "column"
               }
             ]
@@ -417,18 +397,14 @@
       "options": {
         "colorMode": "value",
         "fieldOptions": {
-          "calcs": [
-            "mean"
-          ]
+          "calcs": ["mean"]
         },
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "",
           "values": false
         },
@@ -452,9 +428,7 @@
           "select": [
             [
               {
-                "params": [
-                  "latitude"
-                ],
+                "params": ["latitude"],
                 "type": "column"
               }
             ]
@@ -510,9 +484,7 @@
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "",
           "values": false
         },
@@ -537,9 +509,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -614,9 +584,7 @@
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "",
           "values": false
         },
@@ -690,9 +658,7 @@
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "",
           "values": false
         },
@@ -784,9 +750,7 @@
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "",
           "values": false
         },
@@ -946,9 +910,7 @@
           "select": [
             [
               {
-                "params": [
-                  "charge_energy_added"
-                ],
+                "params": ["charge_energy_added"],
                 "type": "column"
               }
             ]
@@ -1118,9 +1080,7 @@
           "select": [
             [
               {
-                "params": [
-                  "charge_energy_added"
-                ],
+                "params": ["charge_energy_added"],
                 "type": "column"
               }
             ]
@@ -1265,24 +1225,17 @@
       "id": 18,
       "maxDataPoints": 3,
       "options": {
-        "displayLabels": [
-          "name"
-        ],
+        "displayLabels": ["name"],
         "legend": {
           "calcs": [],
           "displayMode": "table",
           "placement": "bottom",
           "showLegend": true,
-          "values": [
-            "value",
-            "percent"
-          ]
+          "values": ["value", "percent"]
         },
         "pieType": "pie",
         "reduceOptions": {
-          "calcs": [
-            "sum"
-          ],
+          "calcs": ["sum"],
           "fields": "",
           "values": false
         },
@@ -1308,9 +1261,7 @@
           "select": [
             [
               {
-                "params": [
-                  "latitude"
-                ],
+                "params": ["latitude"],
                 "type": "column"
               }
             ]
@@ -1414,10 +1365,12 @@
       "maxDataPoints": 1,
       "options": {
         "basemap": {
-          "config": {},
+          "config": {
+            "url": "https://osm-proxy.fusever.com/{z}/{x}/{y}.png",
+            "attribution": "Map data &copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
+          },
           "name": "Layer 0",
-          "tooltip": true,
-          "type": "osm-standard"
+          "type": "custom"
         },
         "controls": {
           "mouseWheelZoom": true,
@@ -1507,9 +1460,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -1609,24 +1560,17 @@
       "id": 20,
       "maxDataPoints": 3,
       "options": {
-        "displayLabels": [
-          "name"
-        ],
+        "displayLabels": ["name"],
         "legend": {
           "calcs": [],
           "displayMode": "table",
           "placement": "bottom",
           "showLegend": true,
-          "values": [
-            "value",
-            "percent"
-          ]
+          "values": ["value", "percent"]
         },
         "pieType": "pie",
         "reduceOptions": {
-          "calcs": [
-            "sum"
-          ],
+          "calcs": ["sum"],
           "fields": "",
           "values": false
         },
@@ -1651,9 +1595,7 @@
           "select": [
             [
               {
-                "params": [
-                  "latitude"
-                ],
+                "params": ["latitude"],
                 "type": "column"
               }
             ]
@@ -1872,9 +1814,7 @@
           "select": [
             [
               {
-                "params": [
-                  "value"
-                ],
+                "params": ["value"],
                 "type": "column"
               }
             ]
@@ -1921,9 +1861,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -2058,9 +1996,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true,
@@ -2082,9 +2018,7 @@
           "select": [
             [
               {
-                "params": [
-                  "value"
-                ],
+                "params": ["value"],
                 "type": "column"
               }
             ]
@@ -2276,9 +2210,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true,
@@ -2300,9 +2232,7 @@
           "select": [
             [
               {
-                "params": [
-                  "value"
-                ],
+                "params": ["value"],
                 "type": "column"
               }
             ]
@@ -2404,9 +2334,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true
@@ -2428,9 +2356,7 @@
           "select": [
             [
               {
-                "params": [
-                  "value"
-                ],
+                "params": ["value"],
                 "type": "column"
               }
             ]
@@ -2545,9 +2471,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true
@@ -2568,9 +2492,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -2592,9 +2514,7 @@
     }
   ],
   "schemaVersion": 39,
-  "tags": [
-    "tesla"
-  ],
+  "tags": ["tesla"],
   "templating": {
     "list": [
       {
@@ -2685,17 +2605,7 @@
       "2h",
       "1d"
     ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
+    "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
   },
   "timezone": "",
   "title": "Charging Stats",
