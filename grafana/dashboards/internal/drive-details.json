@@ -598,11 +598,11 @@
       "options": {
         "basemap": {
           "config": {
-            "url": "https://osm-proxy.fusever.com/{z}/{x}/{y}.png",
-            "attribution": "Map data &copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
+            "attribution": "Open street map",
+            "url": "https://osm-proxy.fusever.com/{z}/{x}/{y}.png"
           },
           "name": "Layer 0",
-          "type": "custom"
+          "type": "xyz"
         },
         "controls": {
           "mouseWheelZoom": true,
