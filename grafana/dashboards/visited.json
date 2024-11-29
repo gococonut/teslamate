@@ -569,7 +569,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select sum(cost) as \"总充电话费\" from charging_processes where $__timeFilter(start_date) AND car_id = $car_id;",
+          "rawSql": "select sum(cost) as \"总充电费用\" from charging_processes where $__timeFilter(start_date) AND car_id = $car_id;",
           "refId": "A",
           "select": [
             [

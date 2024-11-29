@@ -318,7 +318,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "总花费:"
+                "value": "总费用:"
               }
             ]
           }
@@ -472,7 +472,7 @@
         "type": "grafana-postgresql-datasource",
         "uid": "TeslaMate"
       },
-      "description": "通过收藏点、地址、类型、费用和持续时间查看您的充电记录，以便准确统计增加的千瓦时（kWh）和相应的费用。",
+      "description": "通过收藏点、地址、类型、费用和持续时间查看您的充电记录，以便准确数据增加的千瓦时（kWh）和相应的费用。",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -890,7 +890,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "温度"
+                "value": "车外温度"
               },
               {
                 "id": "unit",
@@ -1133,7 +1133,7 @@
               },
               {
                 "id": "displayName",
-                "value": "里程表"
+                "value": "里程数"
               },
               {
                 "id": "custom.minWidth",
@@ -1157,7 +1157,7 @@
               },
               {
                 "id": "displayName",
-                "value": "里程表"
+                "value": "里程数"
               },
               {
                 "id": "custom.minWidth",

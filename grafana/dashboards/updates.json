@@ -158,7 +158,7 @@
           ]
         }
       ],
-      "title": "车机更新记录",
+      "title": "更新记录",
       "type": "stat"
     },
     {
@@ -657,7 +657,7 @@
           ]
         }
       ],
-      "title": "车机更新记录",
+      "title": "更新记录",
       "type": "table"
     }
   ],
@@ -776,7 +776,7 @@
     "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
   },
   "timezone": "",
-  "title": "车机更新记录",
+  "title": "更新记录",
   "uid": "IiC07mgWz",
   "version": 1,
   "weekStart": ""

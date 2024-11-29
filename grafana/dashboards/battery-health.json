@@ -95,7 +95,7 @@
         "type": "grafana-postgresql-datasource",
         "uid": "TeslaMate"
       },
-      "description": "**可用（当前）** 是估算的当前电池容量。它是过去10次充电数据中统计的电池容量的平均值，用以提供更准确的估算。\n\n如果这里显示的是“1.0 kWh”，则意味着您需要进行至少一次长时间的充电。\n\n**可用（新）** 是自您开始使用 Teslamate 以来估算的电池容量。因此，您从新车开始记录的数据越多，估算就越准确。对于那些自购买新车以来没有使用 Teslamate，或者购买了二手车的用户，可以将最大续航设置为 100%，并设置新车时的电池容量，以获得更准确的估算。",
+      "description": "**电池容量（当前）** 是估算的当前电池容量。它是过去10次充电数据中数据的电池容量的平均值，用以提供更准确的估算。\n\n如果这里显示的是“1.0 kWh”，则意味着您需要进行至少一次长时间的充电。\n\n**电池容量（新）** 是自您开始使用 Teslamate 以来估算的电池容量。因此，您从新车开始记录的数据越多，估算就越准确。对于那些自购买新车以来没有使用 Teslamate，或者购买了二手车的用户，可以将最大续航设置为 100%，并设置新车时的电池容量，以获得更准确的估算。",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -157,7 +157,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT  \n  CASE WHEN $custom_kwh_new > 0 THEN $custom_kwh_new ELSE ('$aux'::json ->> 'MaxCapacity')::float END as \"可用（新）\", \n  ('$aux'::json ->> 'CurrentCapacity')::float as \"可用（当前）\",\n  ('$aux'::json ->> 'CurrentCapacity')::float - CASE WHEN $custom_kwh_new > 0 THEN $custom_kwh_new ELSE ('$aux'::json ->> 'MaxCapacity')::float END as \"差异\"\n  \n  \n  \n  \n   \n  \n  ",
+          "rawSql": "SELECT  \n  CASE WHEN $custom_kwh_new > 0 THEN $custom_kwh_new ELSE ('$aux'::json ->> 'MaxCapacity')::float END as \"电池容量（新）\", \n  ('$aux'::json ->> 'CurrentCapacity')::float as \"电池容量（当前）\",\n  ('$aux'::json ->> 'CurrentCapacity')::float - CASE WHEN $custom_kwh_new > 0 THEN $custom_kwh_new ELSE ('$aux'::json ->> 'MaxCapacity')::float END as \"差值\"\n  \n  \n  \n  \n   \n  \n  ",
           "refId": "A",
           "select": [
             [
@@ -238,7 +238,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "最大续航（新车时）"
+                "value": "最大续航（新车）"
               }
             ]
           },
@@ -692,7 +692,7 @@
         "type": "grafana-postgresql-datasource",
         "uid": "TeslaMate"
       },
-      "description": "这个仪表盘旨在查看基于 Teslamate 中记录的数据的电池健康状况。因此，您从新车开始记录的数据越多，估算就越准确。\n\n**衰减** 只是一个估算值，用于作为参考，基于每次充电会话中的 **可用电池电量** 来衡量，并且每次充电会话都需要有足够的 kWh 充入（以避免样本中的脏数据），计算时依据车辆的额定效率。",
+      "description": "这个仪表盘旨在查看基于 Teslamate 中记录的数据的电池健康状况。因此，您从新车开始记录的数据越多，估算就越准确。\n\n**衰减** 只是一个估算值，用于作为参考，基于每次充电会话中的 **可用电量** 来衡量，并且每次充电会话都需要有足够的 kWh 充入（以避免样本中的脏数据），计算时依据车辆的额定效率。",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1113,7 +1113,7 @@
           }
         }
       ],
-      "title": "充电统计",
+      "title": "充电数据",
       "type": "stat"
     },
     {
@@ -1243,7 +1243,7 @@
           }
         }
       ],
-      "title": "当前电量容量（SOC）",
+      "title": "当前电池容量（SOC）",
       "transformations": [
         {
           "id": "configFromData",
@@ -1517,7 +1517,7 @@
           ]
         }
       ],
-      "title": "当前电池能量",
+      "title": "当前电量",
       "type": "bargauge"
     },
     {
