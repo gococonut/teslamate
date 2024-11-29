@@ -456,7 +456,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "温度"
+                "value": "车外温度"
               },
               {
                 "id": "custom.width",
@@ -476,7 +476,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Range"
+                "value": "续航"
               },
               {
                 "id": "custom.width",
@@ -632,7 +632,7 @@
               "minutediff": "Time",
               "odometer": "",
               "outside_temp_avg": "Temperature",
-              "rangediff": "Range Difference",
+              "rangediff": "续航 Difference",
               "soc": "",
               "soc_diff": "SoC 消耗erence",
               "start_address": "开始时间",
