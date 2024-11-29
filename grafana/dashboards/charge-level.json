@@ -266,7 +266,7 @@
           }
         }
       ],
-      "title": "电池容量时序图",
+      "title": "电池容量折线图",
       "transformations": [
         {
           "id": "configFromData",
@@ -485,7 +485,7 @@
     "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
   },
   "timezone": "",
-  "title": "电池容量时序图",
+  "title": "电池容量折线图",
   "uid": "WopVO_mgz",
   "version": 1,
   "weekStart": ""
