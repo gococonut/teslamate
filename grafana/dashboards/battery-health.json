@@ -528,7 +528,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT (\r\n (SELECT ROUND(convert_km((max(end_km) - min(start_km))::numeric, '$length_unit'),0) FROM drives WHERE car_id = $car_id) - \r\n (SELECT ROUND(convert_km(sum(distance)::numeric, '$length_unit'),0) from drives where car_id = $car_id) || ' $length_unit'\r\n)\r\nAS \"丢失数据（未记录\"",
+          "rawSql": "SELECT (\r\n (SELECT ROUND(convert_km((max(end_km) - min(start_km))::numeric, '$length_unit'),0) FROM drives WHERE car_id = $car_id) - \r\n (SELECT ROUND(convert_km(sum(distance)::numeric, '$length_unit'),0) from drives where car_id = $car_id) || ' $length_unit'\r\n)\r\nAS \"丢失数据（未记录)\"",
           "refId": "Data Lost",
           "sql": {
             "columns": [
@@ -901,7 +901,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Total Energy added"
+              "options": "总充电电量"
             },
             "properties": [
               {
@@ -913,7 +913,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Total Energy used"
+              "options": "总电量使用量"
             },
             "properties": [
               {
@@ -925,7 +925,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Charging Efficiency"
+              "options": "充电效率"
             },
             "properties": [
               {
@@ -1035,7 +1035,7 @@
           "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT\n\tsum(charge_energy_added) as \"总充电电量\"\nFROM\n\tcharging_processes\nWHERE\n\tcar_id = $car_id AND charge_energy_added > 0.01",
-          "refId": "Total Energy added",
+          "refId": "总充电电量",
           "sql": {
             "columns": [
               {
@@ -1064,7 +1064,7 @@
           "hide": false,
           "rawQuery": true,
           "rawSql": "SELECT\r\n\tSUM(greatest(charge_energy_added, charge_energy_used)) AS \"总电量使用量\"\r\nFROM\r\n\tcharging_processes\r\nWHERE\r\n\tcar_id = $car_id AND charge_energy_added > 0.01\r\n",
-          "refId": "Total Energy used",
+          "refId": "总电量使用量",
           "sql": {
             "columns": [
               {
@@ -1093,7 +1093,7 @@
           "hide": false,
           "rawQuery": true,
           "rawSql": "SELECT\r\n\tSUM(charge_energy_added) / SUM(greatest(charge_energy_added, charge_energy_used)) AS \"充电效率\"\r\nFROM\r\n\tcharging_processes\r\nWHERE\r\n\tcar_id = $car_id AND charge_energy_added > 0.01\r\n",
-          "refId": "Charging Efficiency",
+          "refId": "充电效率",
           "sql": {
             "columns": [
               {
@@ -1597,7 +1597,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Mileage"
+                "value": "行驶里程"
               }
             ]
           },
@@ -1609,7 +1609,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Battery Capacity"
+                "value": "电池容量"
               },
               {
                 "id": "unit",
@@ -1957,7 +1957,7 @@
     "hidden": true
   },
   "timezone": "browser",
-  "title": "Battery Health",
+  "title": "电池健康",
   "uid": "jchmRiqUfXgTM",
   "version": 1,
   "weekStart": ""
