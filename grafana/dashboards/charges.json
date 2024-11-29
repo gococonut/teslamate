@@ -542,7 +542,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "新增电量"
+                "value": "充电电量"
               },
               {
                 "id": "decimals",
@@ -768,7 +768,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Range gained"
+                "value": "新增续航"
               },
               {
                 "id": "decimals",
