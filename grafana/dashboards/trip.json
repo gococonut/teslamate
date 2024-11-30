@@ -899,7 +899,7 @@
               },
               {
                 "id": "displayName",
-                "value": "Ø 续航（净值）"
+                "value": "Ø 能耗（净值）"
               }
             ]
           },
@@ -915,7 +915,7 @@
               },
               {
                 "id": "displayName",
-                "value": "Ø 续航（净值）"
+                "value": "Ø 能耗（净值）"
               }
             ]
           }
@@ -1035,7 +1035,7 @@
               },
               {
                 "id": "displayName",
-                "value": "Ø 续航（总）"
+                "value": "Ø 能耗（总）"
               }
             ]
           },
@@ -1051,7 +1051,7 @@
               },
               {
                 "id": "displayName",
-                "value": "Ø 续航（总）"
+                "value": "Ø 能耗（总）"
               }
             ]
           }
@@ -1618,7 +1618,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Ø 续航（净值）"
+                "value": "Ø 能耗（净值）"
               },
               {
                 "id": "unit",
@@ -1642,7 +1642,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Ø 续航（净值）"
+                "value": "Ø 能耗（净值）"
               },
               {
                 "id": "unit",

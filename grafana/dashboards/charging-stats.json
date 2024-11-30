@@ -2608,7 +2608,7 @@
     "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
   },
   "timezone": "",
-  "title": "充电数据",
+  "title": "充电统计",
   "uid": "-pkIkhmRz",
   "version": 1,
   "weekStart": ""

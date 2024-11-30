@@ -634,7 +634,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Temp"
+                "value": "车外温度"
               },
               {
                 "id": "unit",

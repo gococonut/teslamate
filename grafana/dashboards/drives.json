@@ -665,7 +665,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Distance"
+                "value": "里程"
               },
               {
                 "id": "unit",
@@ -791,7 +791,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "温度"
+                "value": "车外温度"
               },
               {
                 "id": "unit",
@@ -997,7 +997,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "温度"
+                "value": "车外温度"
               },
               {
                 "id": "unit",
