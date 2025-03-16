@@ -13,19 +13,52 @@ defmodule TeslaMate.Locations.Geocoder do
   alias TeslaMate.Locations.Address
 
   def reverse_lookup(lat, lon, lang \\ "en") do
+    if System.get_env("BD_MAP_AK") do
+      baidu_reverse_lookup(lat, lon, lang)
+    else
+      opts = [
+        format: :jsonv2,
+        addressdetails: 1,
+        extratags: 1,
+        namedetails: 1,
+        zoom: 19,
+        lat: lat,
+        lon: lon
+      ]
+
+      with {:ok, address_raw} <- query("/reverse", lang, opts),
+           {:ok, address} <- into_address(address_raw) do
+        {:ok, address}
+      end
+    end
+  end
+
+  def baidu_reverse_lookup(lat, lon, lang) do
+    ak = System.get_env("BD_MAP_AK")
+
+    url = "https://api.map.baidu.com/reverse_geocoding/v3/"
     opts = [
-      format: :jsonv2,
-      addressdetails: 1,
-      extratags: 1,
-      namedetails: 1,
-      zoom: 19,
-      lat: lat,
-      lon: lon
+      ak: ak,
+      extensions_poi: 1,
+      entire_poi: 1,
+      sort_strategy: "distance",
+      output: :json,
+      coordtype: :bd09ll,
+      location: "#{lat},#{lon}"
     ]
 
-    with {:ok, address_raw} <- query("/reverse", lang, opts),
-         {:ok, address} <- into_address(address_raw) do
+    with {:ok, address_raw} <- baidu_query(url, lang, opts),
+         {:ok, address} <- into_address_baidu(address_raw) do
       {:ok, address}
+    end
+  end
+
+  def baidu_query(url, lang, params) do
+    case get(url, query: params, headers: [{"Accept-Language", lang}]) do
+      {:ok, %Tesla.Env{status: 200, body: body}} -> {:ok, body}
+      {:ok, %Tesla.Env{body: %{"error" => reason}}} -> {:error, reason}
+      {:ok, %Tesla.Env{} = env} -> {:error, reason: "Unexpected response", env: env}
+      {:error, reason} -> {:error, reason}
     end
   end
 
@@ -177,6 +210,38 @@ defmodule TeslaMate.Locations.Geocoder do
   defp get_first(address, [key | aliases]) do
     with nil <- Map.get(address, key), do: get_first(address, aliases)
   end
+
+  defp into_address_baidu(%{"status" => 0, "result" => result}) do
+    addr_comp = result["addressComponent"] || %{}
+    lat = get_in(result, ["location", "lat"]) || 0.0
+    lon = get_in(result, ["location", "lng"]) || 0.0
+
+    address = %{
+      display_name: result["formatted_address_poi"] || result["formatted_address"] || "Unknown Location",
+      osm_id: "#{lat},#{lon}",
+      osm_type: "node",
+      latitude: get_in(result, ["location", "lat"]) || 0.0,
+      longitude: get_in(result, ["location", "lng"]) || 0.0,
+      name: result["business"] || "Unnamed Area",
+      house_number: nil,
+      road: addr_comp["street"] || "Unknown Street",
+      neighbourhood: nil,
+      city: addr_comp["city"] || "Unknown City",
+      county: addr_comp["district"] || "Unknown District",
+      postcode: nil,
+      state: addr_comp["province"] || "Unknown Province",
+      state_district: nil,
+      country: addr_comp["country"] || "China",
+      raw: result
+    }
+    {:ok, address}
+  end
+
+  defp into_address_baidu(%{"status" => code, "message" => msg}) do
+    {:error, {:baidu_api_failure, code, msg}}
+  end
+
+  defp into_address_baidu(_unexpected), do: {:error, :invalid_response_format}
 
   defp log_level(%Tesla.Env{} = env) when env.status >= 400, do: :warning
   defp log_level(%Tesla.Env{}), do: :info
