@@ -12,6 +12,14 @@ defmodule TeslaMate.Locations.Geocoder do
 
   alias TeslaMate.Locations.Address
 
+  defp hash_coordinate(lat, lon) when is_float(lat) and is_float(lon) do
+    lat_rounded = Float.round(lat, 6)
+    lon_rounded = Float.round(lon, 6)
+    :erlang.phash2({lat_rounded, lon_rounded}, 13_421_772_799)
+  rescue
+    _ -> :erlang.phash2({lat, lon})
+  end
+
   def reverse_lookup(lat, lon, lang \\ "en") do
     if System.get_env("BD_MAP_AK") do
       baidu_reverse_lookup(lat, lon, lang)
@@ -218,7 +226,7 @@ defmodule TeslaMate.Locations.Geocoder do
 
     address = %{
       display_name: result["formatted_address_poi"] || result["formatted_address"] || "Unknown Location",
-      osm_id: "#{lat},#{lon}",
+      osm_id: hash_coordinate(lat, lon),
       osm_type: "node",
       latitude: get_in(result, ["location", "lat"]) || 0.0,
       longitude: get_in(result, ["location", "lng"]) || 0.0,
