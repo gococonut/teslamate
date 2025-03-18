@@ -51,7 +51,7 @@ defmodule TeslaMate.Locations.Geocoder do
       entire_poi: 1,
       sort_strategy: "distance",
       output: :json,
-      coordtype: :bd09ll,
+      coordtype: :wgs84ll,
       location: "#{lat},#{lon}"
     ]
 
@@ -220,29 +220,41 @@ defmodule TeslaMate.Locations.Geocoder do
   end
 
   defp into_address_baidu(%{"status" => 0, "result" => result}) do
-    addr_comp = result["addressComponent"] || %{}
     lat = get_in(result, ["location", "lat"]) || 0.0
     lon = get_in(result, ["location", "lng"]) || 0.0
 
-    address = %{
-      display_name: result["formatted_address_poi"] || result["formatted_address"] || "Unknown Location",
+    # 安全获取第一个POI的名称
+    poi_name = get_in(result, ["pois", Access.at(0), "name"])
+
+    # 显示名称优先级：格式化地址 > POI名称 > 默认值
+    display_name =
+      result["formatted_address_poi"] ||
+      result["formatted_address"] ||
+      poi_name ||
+      "未知位置"
+
+    # 名称字段优先级：POI名称 > 商圈名称 > 默认值
+    name = poi_name || result["business"] || "未命名区域"
+
+    %{
+      display_name: display_name,
       osm_id: hash_coordinate(lat, lon),
-      osm_type: "node",
-      latitude: get_in(result, ["location", "lat"]) || 0.0,
-      longitude: get_in(result, ["location", "lng"]) || 0.0,
-      name: result["business"] || "Unnamed Area",
+      osm_type: "noe",
+      latitude: lat,
+      longitude: lon,
+      name: name,
       house_number: nil,
-      road: addr_comp["street"] || "Unknown Street",
+      road: get_in(result, ["addressComponent", "street"]) || "未知街道",
       neighbourhood: nil,
-      city: addr_comp["city"] || "Unknown City",
-      county: addr_comp["district"] || "Unknown District",
+      city: get_in(result, ["addressComponent", "city"]) || "未知城市",
+      county: get_in(result, ["addressComponent", "district"]) || "未知区县",
       postcode: nil,
-      state: addr_comp["province"] || "Unknown Province",
+      state: get_in(result, ["addressComponent", "province"]) || "未知省份",
       state_district: nil,
-      country: addr_comp["country"] || "China",
+      country: get_in(result, ["addressComponent", "country"]) || "中国",
       raw: result
     }
-    {:ok, address}
+    |> then(&{:ok, &1})
   end
 
   defp into_address_baidu(%{"status" => code, "message" => msg}) do
