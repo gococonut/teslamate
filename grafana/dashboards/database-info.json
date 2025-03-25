@@ -65,9 +65,7 @@
     {
       "asDropdown": true,
       "icon": "external link",
-      "tags": [
-        "tesla"
-      ],
+      "tags": ["tesla"],
       "title": "Dashboards",
       "type": "dashboards"
     }
@@ -111,9 +109,7 @@
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "/.*/",
           "values": false
         },
@@ -139,9 +135,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -216,9 +210,7 @@
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "/.*/",
           "values": false
         },
@@ -244,9 +236,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -295,9 +285,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -372,9 +360,7 @@
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "/.*/",
           "values": false
         },
@@ -400,9 +386,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -506,9 +490,7 @@
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "/.*/",
           "values": false
         },
@@ -534,9 +516,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -585,9 +565,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -713,7 +691,7 @@
       },
       "id": 34,
       "panels": [],
-      "title": "Database Information",
+      "title": "数据库概览",
       "type": "row"
     },
     {
@@ -781,9 +759,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true
@@ -885,9 +861,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true
@@ -1035,9 +1009,7 @@
           "countRows": false,
           "enablePagination": true,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true
@@ -1115,9 +1087,7 @@
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "/.*/",
           "values": false
         },
@@ -1143,9 +1113,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -1220,9 +1188,7 @@
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "/.*/",
           "values": false
         },
@@ -1248,9 +1214,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -1364,9 +1328,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -1467,9 +1429,7 @@
           "select": [
             [
               {
-                "params": [
-                  "efficiency"
-                ],
+                "params": ["efficiency"],
                 "type": "column"
               }
             ]
@@ -1629,9 +1589,7 @@
           "countRows": false,
           "enablePagination": true,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true,
@@ -1773,9 +1731,7 @@
           "countRows": false,
           "enablePagination": true,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true,
@@ -1818,9 +1774,7 @@
   ],
   "refresh": "",
   "schemaVersion": 40,
-  "tags": [
-    "tesla"
-  ],
+  "tags": ["tesla"],
   "templating": {
     "list": [
       {
@@ -1962,7 +1916,7 @@
     "refresh_intervals": []
   },
   "timezone": "browser",
-  "title": "Database Information",
+  "title": "数据库概览",
   "uid": "jchmDbInfo",
   "version": 1,
   "weekStart": ""

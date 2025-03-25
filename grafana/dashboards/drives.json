@@ -1438,9 +1438,7 @@
   "preload": false,
   "refresh": "",
   "schemaVersion": 40,
-  "tags": [
-    "tesla"
-  ],
+  "tags": ["tesla"],
   "templating": {
     "list": [
       {
@@ -1484,7 +1482,7 @@
           "value": ""
         },
         "description": "Type a text contained in Start or Destination Location ",
-        "label": "Location",
+        "label": "位置",
         "name": "location",
         "options": [
           {
@@ -1567,7 +1565,7 @@
           "text": "0",
           "value": "0"
         },
-        "label": "Distance >=",
+        "label": "距离 >=",
         "name": "min_dist",
         "options": [
           {
@@ -1584,7 +1582,7 @@
           "text": "0",
           "value": "0"
         },
-        "label": "Speed >=",
+        "label": "速度 >=",
         "name": "min_speed",
         "options": [
           {

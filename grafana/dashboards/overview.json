@@ -1736,7 +1736,7 @@
           ]
         }
       ],
-      "title": "Outside Temp",
+      "title": "室外温度",
       "type": "gauge"
     },
     {
@@ -1797,7 +1797,7 @@
           "refId": "A"
         }
       ],
-      "title": "Inside Temp",
+      "title": "车内温度",
       "transformations": [
         {
           "id": "filterFieldsByName",
@@ -1964,9 +1964,7 @@
   "preload": false,
   "refresh": "30s",
   "schemaVersion": 40,
-  "tags": [
-    "tesla"
-  ],
+  "tags": ["tesla"],
   "templating": {
     "list": [
       {

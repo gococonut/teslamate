@@ -1044,9 +1044,7 @@
   "preload": false,
   "refresh": "",
   "schemaVersion": 40,
-  "tags": [
-    "tesla"
-  ],
+  "tags": ["tesla"],
   "templating": {
     "list": [
       {
@@ -1106,7 +1104,7 @@
           "value": "month"
         },
         "includeAll": false,
-        "label": "Period",
+        "label": "周期",
         "name": "period",
         "options": [
           {
@@ -1170,9 +1168,9 @@
           "text": "no",
           "value": "0"
         },
-        "description": "When enabled \"Ø Consumption (gross)\" will be calculated via Positions instead of Charging Processes and Drives.\n\nWhile being more accurate (especially for shorter periods) this will be slow on slow hardware!",
+        "description": "当启用时，\"Ø消耗量（总）\"将通过位置数据而非充电过程和行驶数据进行计算.\n\n虽然此方法更为准确（尤其是在较短时间内），但在硬件性能较低的情况下，计算速度会较慢！",
         "includeAll": false,
-        "label": "High Precision",
+        "label": "高精度",
         "name": "high_precision",
         "options": [
           {

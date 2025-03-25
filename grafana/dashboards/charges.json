@@ -1334,9 +1334,7 @@
   "preload": false,
   "refresh": "",
   "schemaVersion": 40,
-  "tags": [
-    "tesla"
-  ],
+  "tags": ["tesla"],
   "templating": {
     "list": [
       {
@@ -1481,7 +1479,7 @@
           "text": "",
           "value": ""
         },
-        "label": "Cost >=",
+        "label": "费用 >=",
         "name": "cost",
         "options": [
           {
@@ -1498,7 +1496,7 @@
           "text": "0",
           "value": "0"
         },
-        "label": "Duration (minutes) >=",
+        "label": "时长 (分钟) >=",
         "name": "min_duration_min",
         "options": [
           {

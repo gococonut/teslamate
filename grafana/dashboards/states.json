@@ -30,9 +30,7 @@
     {
       "asDropdown": true,
       "icon": "external link",
-      "tags": [
-        "tesla"
-      ],
+      "tags": ["tesla"],
       "title": "Dashboards",
       "type": "dashboards"
     }
@@ -85,18 +83,14 @@
       "options": {
         "colorMode": "value",
         "fieldOptions": {
-          "calcs": [
-            "mean"
-          ]
+          "calcs": ["mean"]
         },
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "/^time$/",
           "values": true
         },
@@ -120,9 +114,7 @@
           "select": [
             [
               {
-                "params": [
-                  "latitude"
-                ],
+                "params": ["latitude"],
                 "type": "column"
               }
             ]
@@ -175,18 +167,14 @@
       "options": {
         "colorMode": "value",
         "fieldOptions": {
-          "calcs": [
-            "first"
-          ]
+          "calcs": ["first"]
         },
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "/^state$/",
           "values": true
         },
@@ -210,9 +198,7 @@
           "select": [
             [
               {
-                "params": [
-                  "latitude"
-                ],
+                "params": ["latitude"],
                 "type": "column"
               }
             ]
@@ -277,18 +263,14 @@
       "options": {
         "colorMode": "value",
         "fieldOptions": {
-          "calcs": [
-            "lastNotNull"
-          ]
+          "calcs": ["lastNotNull"]
         },
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "",
           "values": true
         },
@@ -312,9 +294,7 @@
           "select": [
             [
               {
-                "params": [
-                  "latitude"
-                ],
+                "params": ["latitude"],
                 "type": "column"
               }
             ]
@@ -454,9 +434,7 @@
           "select": [
             [
               {
-                "params": [
-                  "latitude"
-                ],
+                "params": ["latitude"],
                 "type": "column"
               }
             ]
@@ -473,16 +451,14 @@
           ]
         }
       ],
-      "title": "States",
+      "title": "状态",
       "type": "state-timeline"
     }
   ],
   "preload": false,
   "refresh": "",
   "schemaVersion": 40,
-  "tags": [
-    "tesla"
-  ],
+  "tags": ["tesla"],
   "templating": {
     "list": [
       {
@@ -526,7 +502,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "States",
+  "title": "状态",
   "uid": "xo4BNRkZz",
   "version": 1,
   "weekStart": ""

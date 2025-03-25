@@ -620,9 +620,7 @@
   "preload": false,
   "refresh": "",
   "schemaVersion": 40,
-  "tags": [
-    "tesla"
-  ],
+  "tags": ["tesla"],
   "templating": {
     "list": [
       {
@@ -691,7 +689,7 @@
             "value": "💾 更新"
           }
         ],
-        "query": "🚗 Driving,🔋 Charging,🅿️ Parking,❓ Missing,💾 Updating",
+        "query": "🚗 行车,🔋 充电,🅿️ 停车,❓ 缺失,💾 更新",
         "type": "custom"
       },
       {
@@ -699,7 +697,7 @@
           "text": "",
           "value": ""
         },
-        "label": "Address Filter",
+        "label": "地址",
         "name": "text_filter",
         "options": [
           {
