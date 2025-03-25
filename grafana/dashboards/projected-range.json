@@ -1,30 +1,12 @@
 {
-  "__elements": {},
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "11.2.3"
-    },
-    {
-      "type": "datasource",
-      "id": "grafana-postgresql-datasource",
-      "name": "PostgreSQL",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -51,7 +33,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": null,
   "links": [
     {
       "icon": "dashboard",
@@ -69,11 +50,9 @@
       "type": "dashboards"
     }
   ],
-  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
-      "datasource": "TeslaMate",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -83,12 +62,6 @@
       "id": 4,
       "panels": [],
       "repeat": "car_id",
-      "targets": [
-        {
-          "datasource": "TeslaMate",
-          "refId": "A"
-        }
-      ],
       "title": "$car_id",
       "type": "row"
     },
@@ -191,11 +164,13 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "alias": "",
@@ -361,11 +336,13 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "alias": "",
@@ -466,6 +443,7 @@
             "axisLabel": "续航",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 30,
             "gradientMode": "opacity",
@@ -576,10 +554,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.0",
       "targets": [
         {
           "alias": "",
@@ -664,9 +644,12 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "",
-  "schemaVersion": 39,
-  "tags": ["tesla"],
+  "schemaVersion": 40,
+  "tags": [
+    "tesla"
+  ],
   "templating": {
     "list": [
       {
@@ -679,18 +662,12 @@
         "hide": 2,
         "includeAll": true,
         "label": "Car",
-        "multi": false,
         "name": "car_id",
         "options": [],
         "query": "SELECT\n    id as __value,\n    CASE WHEN COUNT(id) OVER (PARTITION BY name) > 1 AND name IS NOT NULL THEN CONCAT(name, ' - ', RIGHT(vin, 6)) ELSE COALESCE(name, CONCAT('VIN ', vin)) end as __text \nFROM cars\nORDER BY display_priority ASC, name ASC, vin ASC;",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "query"
       },
       {
         "current": {},
@@ -701,19 +678,12 @@
         "definition": "select unit_of_length from settings limit 1;",
         "hide": 2,
         "includeAll": false,
-        "label": "",
-        "multi": false,
         "name": "length_unit",
         "options": [],
         "query": "select unit_of_length from settings limit 1;",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "query"
       },
       {
         "current": {},
@@ -724,18 +694,12 @@
         "definition": "select preferred_range from settings limit 1;",
         "hide": 2,
         "includeAll": false,
-        "multi": false,
         "name": "preferred_range",
         "options": [],
         "query": "select preferred_range from settings limit 1;",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "query"
       },
       {
         "current": {},
@@ -746,19 +710,12 @@
         "definition": "select unit_of_temperature from settings limit 1;",
         "hide": 2,
         "includeAll": false,
-        "label": "",
-        "multi": false,
         "name": "temp_unit",
         "options": [],
         "query": "select unit_of_temperature from settings limit 1;",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "query"
       },
       {
         "current": {},
@@ -769,26 +726,18 @@
         "definition": "select base_url from settings limit 1;",
         "hide": 2,
         "includeAll": false,
-        "label": "",
-        "multi": false,
         "name": "base_url",
         "options": [],
         "query": "select base_url from settings limit 1;",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "query"
       },
       {
         "auto": false,
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "selected": false,
           "text": "6h",
           "value": "6h"
         },
@@ -829,7 +778,6 @@
         ],
         "query": "5m,15m,30m,1h,3h,6h",
         "refresh": 2,
-        "skipUrlSync": false,
         "type": "interval"
       }
     ]
@@ -838,21 +786,7 @@
     "from": "now-6M",
     "to": "now"
   },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ],
-    "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
-  },
+  "timepicker": {},
   "timezone": "",
   "title": "续航",
   "uid": "riqUfXgRz",

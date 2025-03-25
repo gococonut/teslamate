@@ -24,7 +24,7 @@ Source: [postgresql.org/download](https://www.postgresql.org/download/)
 </details>
 
 <details>
-  <summary>Elixir (v1.12+)</summary>
+  <summary>Elixir (v1.16+)</summary>
 
 ```bash
 wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb && sudo dpkg -i erlang-solutions_2.0_all.deb
@@ -32,12 +32,12 @@ sudo apt-get update
 sudo apt-get install -y elixir esl-erlang
 ```
 
-Source: [elixir-lang.org/install](https://elixir-lang.org/install)
+Source: [erlang.org/downloads](https://www.erlang.org/downloads#prebuilt)
 
 </details>
 
 <details>
-  <summary>Grafana (v11.2.3+)</summary>
+  <summary>Grafana (v11.5.0+)</summary>
 
 ```bash
 sudo apt-get install -y apt-transport-https software-properties-common
@@ -67,14 +67,14 @@ Source: [mosquitto.org/download](https://mosquitto.org/download/)
 </details>
 
 <details>
-  <summary>Node.js (v14+)</summary>
+  <summary>Node.js (v20+)</summary>
 
 ```bash
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo bash -
 sudo apt-get install -y nodejs
 ```
 
-Source: [nodejs.org/en/download/package-manager](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages)
+Source: [nodejs.org/en/download/package-manager](https://nodejs.org/en/download/package-manager/all#debian-and-ubuntu-based-linux-distributions)
 
 </details>
 
@@ -141,7 +141,7 @@ values={[
 
 Create a systemd service at `/etc/systemd/system/teslamate.service`:
 
-```
+```ini
 [Unit]
 Description=TeslaMate
 After=network.target
@@ -203,7 +203,7 @@ You should at least substitute the following details:
 - `TZ` should be your local timezone. Work out your timezone name using the [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) in the linked Wikipedia page.
 - `TESLAMATEPATH` should be the path that you ran the `git clone` within.
 
-```
+```bash
 export ENCRYPTION_KEY="your_secure_encryption_key_here"
 export DATABASE_USER="teslamate"
 export DATABASE_PASS="your_secure_password_here"
@@ -243,53 +243,53 @@ screen -S teslamate -L -dm bash -c "cd /usr/src/teslamate; ./start.sh; exec sh"
 
 ## Import Grafana Dashboards
 
-1.  Visit [localhost:3000](http://localhost:3000) and log in. The default credentials are: `admin:admin`.
+1. Visit [localhost:3000](http://localhost:3000) and log in. The default credentials are: `admin:admin`.
 
-2.  Create a data source with the name "TeslaMate":
+2. Create a data source with the name "TeslaMate":
 
-    ```
-    Type: PostgreSQL
-    Default: YES
-    Name: TeslaMate
-    Host: localhost
-    Database: teslamate
-    User: teslamate  Password: your_secure_password_here
-    SSL-Mode: disable
-    Version: 10
-    ```
+   ```grafana
+   Type: PostgreSQL
+   Default: YES
+   Name: TeslaMate
+   Host: localhost
+   Database: teslamate
+   User: teslamate  Password: your_secure_password_here
+   SSL-Mode: disable
+   Version: 10
+   ```
 
-3.  [Manually import](https://grafana.com/docs/reference/export_import/#importing-a-dashboard) the dashboard [files](https://github.com/teslamate-org/teslamate/tree/master/grafana/dashboards) or use the `dashboards.sh` script:
+3. [Manually import](https://grafana.com/docs/reference/export_import/#importing-a-dashboard) the dashboard [files](https://github.com/teslamate-org/teslamate/tree/master/grafana/dashboards) or use the `dashboards.sh` script:
 
-    ```bash
-    $ ./grafana/dashboards.sh restore
+   ```bash
+   $ ./grafana/dashboards.sh restore
 
-    URL:                  http://localhost:3000
-    LOGIN:                admin:admin
-    DASHBOARDS_DIRECTORY: ./grafana/dashboards
+   URL:                  http://localhost:3000
+   LOGIN:                admin:admin
+   DASHBOARDS_DIRECTORY: ./grafana/dashboards
 
-    RESTORED locations.json
-    RESTORED drive-stats.json
-    RESTORED updates.json
-    RESTORED drive-details.json
-    RESTORED charge-details.json
-    RESTORED states.json
-    RESTORED overview.json
-    RESTORED vampire-drain.json
-    RESTORED visited.json
-    RESTORED drives.json
-    RESTORED projected-range.json
-    RESTORED charge-level.json
-    RESTORED charging-stats.json
-    RESTORED mileage.json
-    RESTORED charges.json
-    RESTORED efficiency.json
-    ```
+   RESTORED locations.json
+   RESTORED drive-stats.json
+   RESTORED updates.json
+   RESTORED drive-details.json
+   RESTORED charge-details.json
+   RESTORED states.json
+   RESTORED overview.json
+   RESTORED vampire-drain.json
+   RESTORED visited.json
+   RESTORED drives.json
+   RESTORED projected-range.json
+   RESTORED charge-level.json
+   RESTORED charging-stats.json
+   RESTORED mileage.json
+   RESTORED charges.json
+   RESTORED efficiency.json
+   ```
 
-    :::tip
-    To use credentials other than the default, set the `LOGIN` variable:
+   :::tip
+   To use credentials other than the default, set the `LOGIN` variable:
 
-    ```bash
-    LOGIN=user:password ./grafana/dashboards.sh restore
-    ```
+   ```bash
+   LOGIN=user:password ./grafana/dashboards.sh restore
+   ```
 
-    :::
+   :::
