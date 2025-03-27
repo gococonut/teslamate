@@ -177,7 +177,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Speed"
+                "value": "速度"
               }
             ]
           },
@@ -197,7 +197,7 @@
               },
               {
                 "id": "displayName",
-                "value": "Power"
+                "value": "功率"
               }
             ]
           },
@@ -209,7 +209,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Battery Heater"
+                "value": "电池加热"
               },
               {
                 "id": "unit",
@@ -229,7 +229,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Range (ideal)"
+                "value": "续航 (ideal)"
               },
               {
                 "id": "min",
@@ -245,7 +245,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Range (rated)"
+                "value": "续航 (rated)"
               },
               {
                 "id": "min",
@@ -265,7 +265,7 @@
               },
               {
                 "id": "displayName",
-                "value": "SOC"
+                "value": "电量"
               },
               {
                 "id": "custom.axisPlacement",
@@ -281,7 +281,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Usable SOC"
+                "value": "可用电量"
               },
               {
                 "id": "unit",
@@ -301,7 +301,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Range (est.)"
+                "value": "续航 (est.)"
               },
               {
                 "id": "custom.axisPlacement",
@@ -316,7 +316,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Power"
+              "options": "功率"
             },
             "properties": [
               {
@@ -331,7 +331,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Usable SOC"
+              "options": "可用电量"
             },
             "properties": [
               {
@@ -346,7 +346,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "SOC"
+              "options": "电量"
             },
             "properties": [
               {
@@ -361,7 +361,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Range (est.)"
+              "options": "续航 (est.)"
             },
             "properties": [
               {
@@ -376,7 +376,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Range (ideal)"
+              "options": "续航 (ideal)"
             },
             "properties": [
               {
@@ -391,7 +391,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Battery Heater"
+              "options": "电池加热"
             },
             "properties": [
               {
@@ -406,7 +406,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Speed"
+              "options": "速度"
             },
             "properties": [
               {
@@ -421,7 +421,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Range (rated)"
+              "options": "续航 (rated)"
             },
             "properties": [
               {
@@ -509,7 +509,7 @@
           ]
         }
       ],
-      "title": "Drive",
+      "title": "行车数据",
       "type": "timeseries"
     },
     {
@@ -846,7 +846,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Elevation"
+                "value": "海拔"
               },
               {
                 "id": "color",
@@ -860,7 +860,7 @@
         ]
       },
       "gridPos": {
-        "h": 12,
+        "h": 6,
         "w": 12,
         "x": 0,
         "y": 12
@@ -913,7 +913,7 @@
           ]
         }
       ],
-      "title": "Elevation",
+      "title": "海拔",
       "type": "timeseries"
     },
     {
@@ -1046,7 +1046,7 @@
               },
               {
                 "id": "displayName",
-                "value": "Outside Temperature"
+                "value": "室外温度"
               }
             ]
           },
@@ -1065,31 +1065,7 @@
               },
               {
                 "id": "displayName",
-                "value": "Inside Temperature"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "driver_temp_.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Driver Temperature"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "passenger_temp_.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Passenger Temperature"
+                "value": "车内温度"
               }
             ]
           },
@@ -1109,23 +1085,7 @@
               },
               {
                 "id": "displayName",
-                "value": "Climate"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "fan_status"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Fan status"
-              },
-              {
-                "id": "custom.axisPlacement",
-                "value": "hidden"
+                "value": "空调"
               }
             ]
           }
@@ -1185,260 +1145,7 @@
           ]
         }
       ],
-      "title": "Temperatures",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "grafana-postgresql-datasource",
-        "uid": "TeslaMate"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 5,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "links": [],
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "tpms_pressure_front_left_bar"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "pressurebar"
-              },
-              {
-                "id": "displayName",
-                "value": "Front Left"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "tpms_pressure_front_right_bar"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "pressurebar"
-              },
-              {
-                "id": "displayName",
-                "value": "Front Right"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "tpms_pressure_rear_left_bar"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "pressurebar"
-              },
-              {
-                "id": "displayName",
-                "value": "Rear Left"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "tpms_pressure_rear_right_bar"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "pressurebar"
-              },
-              {
-                "id": "displayName",
-                "value": "Rear Right"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "tpms_pressure_front_left_psi"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "pressurepsi"
-              },
-              {
-                "id": "displayName",
-                "value": "Front Left"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "tpms_pressure_front_right_psi"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "pressurepsi"
-              },
-              {
-                "id": "displayName",
-                "value": "Front Right"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "tpms_pressure_rear_left_psi"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "pressurepsi"
-              },
-              {
-                "id": "displayName",
-                "value": "Rear Left"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "tpms_pressure_rear_right_psi"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "pressurepsi"
-              },
-              {
-                "id": "displayName",
-                "value": "Rear Right"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 12,
-        "y": 18
-      },
-      "id": 32,
-      "options": {
-        "legend": {
-          "calcs": ["logmin", "max"],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "maxHeight": 600,
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.5.2",
-      "targets": [
-        {
-          "alias": "",
-          "datasource": {
-            "type": "grafana-postgresql-datasource",
-            "uid": "TeslaMate"
-          },
-          "format": "time_series",
-          "group": [],
-          "hide": false,
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\r\n    $__time(date),\r\n    convert_tire_pressure(tpms_pressure_fl,'$pressure_unit') AS tpms_pressure_front_left_$pressure_unit,\r\n    convert_tire_pressure(tpms_pressure_fr,'$pressure_unit') AS tpms_pressure_front_right_$pressure_unit,\r\n    convert_tire_pressure(tpms_pressure_rl,'$pressure_unit') AS tpms_pressure_rear_left_$pressure_unit,\r\n    convert_tire_pressure(tpms_pressure_rr,'$pressure_unit') AS tpms_pressure_rear_right_$pressure_unit\r\nFROM\r\n    positions\r\nWHERE\r\n    car_id = $car_id AND\r\n    $__timeFilter(date) AND\r\n    tpms_pressure_fl is not null\r\nORDER BY\r\n    date ASC",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": ["id"],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "pos",
-          "timeColumn": "date",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "title": "Tire Pressure",
+      "title": "温度",
       "type": "timeseries"
     },
     {
@@ -1522,7 +1229,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT_WS(' - ', round(convert_km(start_km::numeric, '$length_unit')), round(convert_km(end_km::numeric, '$length_unit'))) ||' $length_unit' as \"Odometer\"\r\nFROM drives d\r\nWHERE d.id = $drive_id",
+          "rawSql": "SELECT CONCAT_WS(' - ', round(convert_km(start_km::numeric, '$length_unit')), round(convert_km(end_km::numeric, '$length_unit'))) ||' $length_unit' as \"里程\"\r\nFROM drives d\r\nWHERE d.id = $drive_id",
           "refId": "A",
           "select": [
             [
@@ -1561,7 +1268,7 @@
           ]
         }
       ],
-      "title": "Odometer (From - To)",
+      "title": "里程 (From - To)",
       "type": "stat"
     },
     {
@@ -1653,7 +1360,7 @@
           ]
         }
       ],
-      "title": "Drive Duration",
+      "title": "行车时长",
       "type": "stat"
     },
     {
@@ -1735,7 +1442,7 @@
           }
         }
       ],
-      "title": "Selected Duration",
+      "title": "所选时长",
       "type": "stat"
     },
     {
@@ -1833,7 +1540,7 @@
           "mode": "multi",
           "sort": "none"
         },
-        "xField": "Speed",
+        "xField": "速度",
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 0
       },
@@ -1849,7 +1556,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT \r\n    speed_section_$length_unit AS \"Speed\",\r\n    SUM(seconds_elapsed) * 100 / MAX(duration) as \"Elapsed\",\r\n    TO_CHAR((SUM(seconds_elapsed) || ' second')::interval, 'HH24:MI:SS') AS \"Time\"\r\nFROM (\r\n    SELECT\r\n        ROUND(convert_km(p.speed::numeric, '$length_unit') / 10,0) * 10 AS speed_section_$length_unit,\r\n        EXTRACT(EPOCH FROM (LEAD(p.\"date\") OVER (ORDER BY p.\"date\") - p.\"date\")) AS seconds_elapsed,\r\n        EXTRACT(EPOCH FROM (end_date - start_date)) AS duration\r\n    FROM drives d\r\n    INNER JOIN positions p ON p.drive_id = d.id\r\n    WHERE d.id = $drive_id\r\n) AS drivedata\r\nWHERE speed_section_$length_unit>0\r\nGROUP BY 1\r\nORDER BY 1",
+          "rawSql": "SELECT \r\n    speed_section_$length_unit AS \"速度\",\r\n    SUM(seconds_elapsed) * 100 / MAX(duration) as \"Elapsed\",\r\n    TO_CHAR((SUM(seconds_elapsed) || ' second')::interval, 'HH24:MI:SS') AS \"Time\"\r\nFROM (\r\n    SELECT\r\n        ROUND(convert_km(p.speed::numeric, '$length_unit') / 10,0) * 10 AS speed_section_$length_unit,\r\n        EXTRACT(EPOCH FROM (LEAD(p.\"date\") OVER (ORDER BY p.\"date\") - p.\"date\")) AS seconds_elapsed,\r\n        EXTRACT(EPOCH FROM (end_date - start_date)) AS duration\r\n    FROM drives d\r\n    INNER JOIN positions p ON p.drive_id = d.id\r\n    WHERE d.id = $drive_id\r\n) AS drivedata\r\nWHERE speed_section_$length_unit>0\r\nGROUP BY 1\r\nORDER BY 1",
           "refId": "A",
           "select": [
             [
@@ -1886,7 +1593,7 @@
           ]
         }
       ],
-      "title": "Speed Histogram ($speed_unit)",
+      "title": "速度柱状图 ($speed_unit)",
       "transformations": [
         {
           "id": "filterFieldsByName",
@@ -2013,7 +1720,7 @@
           ]
         }
       ],
-      "title": "Distance driven",
+      "title": "行车距离",
       "type": "stat"
     },
     {
@@ -2161,7 +1868,7 @@
           ]
         }
       ],
-      "title": "Elevation Summary",
+      "title": "海拔汇总",
       "type": "stat"
     },
     {
@@ -2251,7 +1958,7 @@
           ]
         }
       ],
-      "title": "Energy consumed (net)",
+      "title": "电量消耗 (净值)",
       "type": "stat"
     },
     {
@@ -2259,7 +1966,7 @@
         "type": "grafana-postgresql-datasource",
         "uid": "TeslaMate"
       },
-      "description": "Shows how much energy has been recovered through regenerative braking.\n\n\"Energy recovered\" is already included in \"Energy consumed (net)\" and is determined by looking for periods with negative power within your drive. \n\nRequires Streaming API to be enabled and available for this drive.",
+      "description": "Shows how much energy has been recovered through regenerative braking.\n\n\"电量增加\" is already included in \"电量消耗 (净值)\" and is determined by looking for periods with negative power within your drive. \n\nRequires Streaming API to be enabled and available for this drive.",
       "fieldConfig": {
         "defaults": {
           "decimals": 2,
@@ -2360,7 +2067,7 @@
           ]
         }
       ],
-      "title": "Energy recovered",
+      "title": "电量增加",
       "type": "stat"
     },
     {
@@ -2493,7 +2200,7 @@
           ]
         }
       ],
-      "title": "Consumption (net)",
+      "title": "能耗 (净值)",
       "type": "stat"
     },
     {
@@ -2619,7 +2326,7 @@
           ]
         }
       ],
-      "title": "Ø Speed",
+      "title": "Ø 速度",
       "type": "stat"
     }
   ],
