@@ -116,8 +116,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -170,7 +169,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "",
@@ -287,8 +286,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -342,7 +340,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "",
@@ -559,7 +557,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.0",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "",
@@ -646,10 +644,8 @@
   ],
   "preload": false,
   "refresh": "",
-  "schemaVersion": 40,
-  "tags": [
-    "tesla"
-  ],
+  "schemaVersion": 41,
+  "tags": ["tesla"],
   "templating": {
     "list": [
       {
@@ -790,6 +786,5 @@
   "timezone": "",
   "title": "续航",
   "uid": "riqUfXgRz",
-  "version": 1,
-  "weekStart": ""
+  "version": 1
 }

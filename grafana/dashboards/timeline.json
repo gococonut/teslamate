@@ -79,8 +79,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -511,7 +510,7 @@
           }
         ]
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -619,7 +618,7 @@
   ],
   "preload": false,
   "refresh": "",
-  "schemaVersion": 40,
+  "schemaVersion": 41,
   "tags": ["tesla"],
   "templating": {
     "list": [
@@ -769,6 +768,5 @@
   "timezone": "",
   "title": "行车记录",
   "uid": "SUBgwtigz",
-  "version": 1,
-  "weekStart": ""
+  "version": 1
 }

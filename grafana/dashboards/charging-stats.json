@@ -62,8 +62,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#c7d0d9",
-                "value": null
+                "color": "#c7d0d9"
               }
             ]
           },
@@ -97,7 +96,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -145,8 +144,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#c7d0d9",
-                "value": null
+                "color": "#c7d0d9"
               }
             ]
           },
@@ -180,7 +178,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -229,8 +227,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#c7d0d9",
-                "value": null
+                "color": "#c7d0d9"
               }
             ]
           },
@@ -264,7 +261,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -313,8 +310,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#c7d0d9",
-                "value": null
+                "color": "#c7d0d9"
               }
             ]
           },
@@ -348,7 +344,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -398,8 +394,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#d8d9da",
-                "value": null
+                "color": "#d8d9da"
               }
             ]
           }
@@ -428,7 +423,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -498,8 +493,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#d8d9da",
-                "value": null
+                "color": "#d8d9da"
               }
             ]
           }
@@ -528,7 +522,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -572,8 +566,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#d8d9da",
-                "value": null
+                "color": "#d8d9da"
               }
             ]
           }
@@ -602,7 +595,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -664,8 +657,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#d8d9da",
-                "value": null
+                "color": "#d8d9da"
               }
             ]
           }
@@ -694,7 +686,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -813,7 +805,7 @@
           "unit": "short"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -900,8 +892,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent",
-                "value": null
+                "color": "transparent"
               }
             ]
           },
@@ -970,7 +961,7 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -1152,7 +1143,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -1229,8 +1220,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1351,7 +1341,7 @@
           "zoom": 15
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -1489,7 +1479,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -1564,8 +1554,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1706,7 +1695,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "",
@@ -1912,7 +1901,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "11.5.0",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -2124,7 +2113,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "11.5.0",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -2246,7 +2235,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.5.0",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -2382,7 +2371,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.5.0",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -2421,10 +2410,8 @@
   ],
   "preload": false,
   "refresh": "",
-  "schemaVersion": 40,
-  "tags": [
-    "tesla"
-  ],
+  "schemaVersion": 41,
+  "tags": ["tesla"],
   "templating": {
     "list": [
       {
@@ -2486,6 +2473,5 @@
   "timezone": "",
   "title": "充电统计",
   "uid": "-pkIkhmRz",
-  "version": 1,
-  "weekStart": ""
+  "version": 1
 }

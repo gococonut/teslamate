@@ -102,8 +102,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent",
-                "value": null
+                "color": "transparent"
               }
             ]
           },
@@ -132,7 +131,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "",
@@ -279,10 +278,8 @@
   ],
   "preload": false,
   "refresh": "",
-  "schemaVersion": 40,
-  "tags": [
-    "tesla"
-  ],
+  "schemaVersion": 41,
+  "tags": ["tesla"],
   "templating": {
     "list": [
       {
@@ -420,6 +417,5 @@
   "timezone": "",
   "title": "电池容量图",
   "uid": "WopVO_mgz",
-  "version": 1,
-  "weekStart": ""
+  "version": 1
 }

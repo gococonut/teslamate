@@ -6,6 +6,26 @@
 
 ### Improvements and bug fixes
 
+#### Build, CI, internal
+
+#### Dashboards
+
+#### Translations
+
+#### Documentation
+
+## [1.33.0] - 2025-03-28
+
+As always, there are many improvements.
+
+We now use Grafana 11.6.0 which was release the last days, improved the logging and state transitions, added a new dashboard for database information and improved other dashboards. We also added a new section to the documentation about the Entity Relationship Model (ERM) of TeslaMate. This is a great help for developers who want to understand the data model of TeslaMate and how to extend it.
+
+Enjoy it.
+
+### New features
+
+### Improvements and bug fixes
+
 - fix(nix): wait for mosquitto to start before starting teslamate (#4419 - @brianmay)
 - feat: use Grafana 11.4.0 (#4299 - @swiffer)
 - feat: improve logging messages (#4467 - @micves and @brianmay)
@@ -18,6 +38,7 @@
 - feat: Grafana 11.5.0 (#4509 - @swiffer)
 - feat: Grafana 11.5.2 (#4551 - @swiffer)
 - fix(nix): update mix dependency hash in nix builds. (#4577 - @weiren2)
+- feat: Grafana 11.6.0 (#4570 - @swiffer)
 
 #### Build, CI, internal
 
@@ -57,6 +78,7 @@
 - build(deps): bump @babel/runtime from 7.26.0 to 7.26.10 in /website (#4589)
 - build(deps): bump @babel/helpers from 7.26.7 to 7.26.10 in /website (#4588)
 - build(deps): bump @babel/runtime-corejs3 in /website (#4587)
+- build(deps): update flake.lock (#4562)
 
 #### Dashboards
 
@@ -81,6 +103,8 @@
 - docs: add reindexing instructions for database maintenance to improve performance in case of index bloat due to frequent updates or deletions (#4558 and #4574 - @jheredianet)
 - docs: Update projects using TeslaMate (#4573 - @jheredianet)
 - docs: fix and rearrange screenshot links (alphabetical) (#4580 - @swiffer)
+- docs: enhance TeslaFi import documentation with updated Python script for bulk data export (#4575 - @TheLinuxGuy and @JakobLichterfeld)
+- docs: add Entity Relationship Model section to development documentation (#4586 - @DrMichael and @JakobLichterfeld)
 
 ## [1.32.0] - 2024-11-23
 
@@ -2326,7 +2350,8 @@ New users need to sign in via the web interface.
 
 ## [1.0.0] - 2019-07-25
 
-[unreleased]: https://github.com/teslamate-org/teslamate/compare/v1.32.0...HEAD
+[unreleased]: https://github.com/teslamate-org/teslamate/compare/v1.33.0...HEAD
+[1.33.0]: https://github.com/teslamate-org/teslamate/compare/v1.32.0...v1.33.0
 [1.32.0]: https://github.com/teslamate-org/teslamate/compare/v1.31.1...v1.32.0
 [1.31.1]: https://github.com/teslamate-org/teslamate/compare/v1.31.0...v1.31.1
 [1.31.0]: https://github.com/teslamate-org/teslamate/compare/v1.30.1...v1.31.0

@@ -71,8 +71,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               }
             ]
           }
@@ -136,8 +135,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "super-light-orange",
-                      "value": null
+                      "color": "super-light-orange"
                     },
                     {
                       "color": "light-orange",
@@ -320,8 +318,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "super-light-blue",
-                      "value": null
+                      "color": "super-light-blue"
                     },
                     {
                       "color": "super-light-green",
@@ -472,8 +469,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "super-light-blue",
-                      "value": null
+                      "color": "super-light-blue"
                     },
                     {
                       "color": "super-light-green",
@@ -637,7 +633,7 @@
           }
         ]
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -1043,7 +1039,7 @@
   ],
   "preload": false,
   "refresh": "",
-  "schemaVersion": 40,
+  "schemaVersion": 41,
   "tags": ["tesla"],
   "templating": {
     "list": [
@@ -1197,6 +1193,5 @@
   "timezone": "",
   "title": "数据汇总",
   "uid": "1EZnXszMk",
-  "version": 1,
-  "weekStart": ""
+  "version": 1
 }
