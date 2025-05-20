@@ -555,7 +555,7 @@
         "basemap": {
           "config": {
             "attribution": "Open street map",
-            "url": "https://osm-proxy.fusever.com/{z}/{x}/{y}.png"
+            "url": "https://osm-proxy.mytesla.cc/{z}/{x}/{y}.png"
           },
           "name": "Layer 0",
           "type": "xyz"
