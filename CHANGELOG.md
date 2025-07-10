@@ -1,18 +1,83 @@
 # Changelog
 
-## [unreleased]
+## [2.0.0] - 2025-04-26
+
+**This is a breaking change release:** TeslaMate uses PostgreSQL as database, this is an external dependency and needs to be updated by yourself. We now require PostgreSQL 16.7 or 17.3 or higher as we are upgrading the bundled earthdistance extension to v1.2. TeslaMate will now fail to start if you are using an older version. Ensure to upgrade your database before upgrading TeslaMate. To upgrade PostgreSQL, you need to follow these instructions:
+
+- [Backup your data](https://docs.teslamate.org/docs/maintenance/backup_restore#backup)
+- [Upgrade PostgreSQL to postgres:17](https://docs.teslamate.org/docs/maintenance/upgrading_postgres) (Yes, you will have to erase your data, which is why you need your backup in the first place.)
+- [Upgrade TeslaMate to this version](https://docs.teslamate.org/docs/upgrading)
+- [Backup your data after the upgrade](https://docs.teslamate.org/docs/maintenance/backup_restore#backup)
+
+**Note for user which revoked permissions:** If the SUPERUSER privilege has been revoked after the initial (manual) installation, it must be temporarily granted for pending earthdistance migrations to succeed. The privilege can then be safely revoked.
+
+As always, there are also many improvements. The webview now shows the TPMS values in the low pressure tooltip. We use the latest Grafana 11.6.1 and have improved the battery health dashboard and aligned the range calculation through the dashboards. Additionally time zone handling has been improved and the date formats are now based on the browser locale.
+
+Enjoy it.
+
+**Note for contributors:** The default branch was renamed to `main`. Please update your local repository accordingly (see GitHub hint when visiting [teslamate-org/teslamate](https://github.com/teslamate-org/teslamate) or [GitHub documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/renaming-a-branch#updating-a-local-clone-after-a-branch-name-changes) for more information).
+
+### Breaking Changes
+
+- feat: check Postgres version on startup, require 16.7 / 17.3, update earthdistance extension (#4648 - @swiffer)
 
 ### New features
 
+- feat: show tpms value to the low pressure tooltip in webview (#4654 - @NirKli)
+
 ### Improvements and bug fixes
+
+- fix(nix): non-recursive provider for ../grafana/dashboards (#4680 - @swiffer)
+- feat: use Grafana 11.6.1 (#4662 - @swiffer)
 
 #### Build, CI, internal
 
+- build(deps): bump image-size from 1.2.0 to 1.2.1 in /website (#4622)
+- ci: switch to cache-nix-action as Magic Nix Cache is deprecated (#4626 - @JakobLichterfeld)
+- build(deps): update flake.lock (#4603)
+- build(deps): bump crate-ci/typos from 1.30.0 to 1.31.1 (#4611)
+- build(deps): bump docker/login-action from 3.3.0 to 3.4.0 (#4612)
+- build(deps): bump actions/cache from 4.2.2 to 4.2.3 (#4613)
+- build(deps): bump tesla from 1.13.2 to 1.14.1 (#4616)
+- ci(sec): remove pull_request_target workflow triggers to improve sec even further, the downside is that test images are now only created for repo's own PRs (#4637 - @JakobLichterfeld / Thanks to @Firebasky for responsibly disclosing the vulnerability)
+- ci: fix ghcr build ([..ddf85e6](https://github.com/teslamate-org/teslamate/commit/ba35f417014e6be742ee2b0713cfa7876ddf85e6) - @JakobLichterfeld)
+- ci: ensure ghcr images build correctly even if branch contains backslash (#4655 - @JakobLichterfeld)
+- ci: skip ghcr build for PRs from outside repo (#4660 and [462b568](https://github.com/teslamate-org/teslamate/commit/462b5680abbfbdfd26f028d88f7a62f4ae4183cd) - @JakobLichterfeld)
+- build(deps): bump estree-util-value-to-estree in /website (#4641)
+- build(deps): update flake.lock (#4653)
+- fix(nix): update mix dependency hash in nix builds ([3d08431](https://github.com/teslamate-org/teslamate/commit/3d08431ee3de0eaf3d3045aa0018c687627c4dac) - @JakobLichterfeld)
+- ci(dependabot): add ignore rules for path-based dependencies (#4666 - @JakobLichterfeld)
+- sec: upgrade esbuild to 0.25.2 and esbuild-sass-plugin to 3.3.1 to avoid GHSA-67mh-4wv8-2f99 (#4669 - @JakobLichterfeld)
+- build(deps): bump http-proxy-middleware from 2.0.7 to 2.0.9 in /website (#4670)
+- build(deps): bump phoenix_html from 4.2.0 to 4.2.1 (#4667)
+- build(deps): bump ex_cldr from 2.40.2 to 2.42.0 (#4615)
+- build(deps): bump react from 18.3.1 to 19.1.0 and docusaurus/core from 3.4.0 to 3.7.0 in /website (#4618 - @JakobLichterfeld)
+- build(deps): bump phoenix_ecto from 4.6.2 to 4.6.3 (#4333)
+- build(deps): update flake.lock (#4674)
+- fix(nix): update mix dependency hash in nix builds (#4695 - @JakobLichterfeld)
+- chore: rename branch to main (#4700 - @JakobLichterfeld and @adriankumpf)
+- build(deps-dev): bump phoenix_live_reload from 1.5.3 to 1.6.0 (#4699)
+- build(deps): bump tortoise311 from 0.12.0 to 0.12.1 (#4698)
+- build(deps): bump nix-community/cache-nix-action from 6.1.2 to 6.1.3 (#4696)
+- build(deps): bump floki from 0.36.3 to 0.37.1 (#4697)
+
 #### Dashboards
+
+- fix: improve calc for usable (now) in battery health dashboard (#4644 - @swiffer)
+- feat: make use of car filter, add timefilter in locations dashboard (#4647 - @swiffer)
+- fix: use same rated range calculation in updates dashboard as in battery health dashboard (#4682 - @swiffer)
+- fix: explicitly set height of home dashboard background image based on current layout & grafana css (#4681 -@swiffer)
+- fix: set $\_\_timezone explicitly in dashboards to ensure truncation is done with respect to the Grafana timezone (#4684 - @swiffer)
+- fix: issues when using browser locale for date formats (#4662 - @swiffer)
+- fix: widens Date Columns to fully show date strings formatted in US locale (#4662 - @swiffer)
 
 #### Translations
 
 #### Documentation
+
+- chore(issue-template): add PostgreSQL version input and checkbox for latest version check in bug report template (#4643 - @JakobLichterfeld)
+- docs: allow to add energy added to the Home Assistant's Energy tab to measure how much energy each session uses (#4659 - @alexsapran)
+- docs: update changelog with breaking changes description (#4691 - @JakobLichterfeld)
 
 ## [1.33.0] - 2025-03-28
 
@@ -191,7 +256,7 @@ Please also note: [v1.31.0 Release Notes](https://github.com/teslamate-org/tesla
 
 As always, lots of improvements. The focus has been on performance improvements, especially on slow HW like Raspberry Pi 3B+. We achieved 240x speed improvements in several dashboards :rocket: And we welcomed @swiffer to the TeslaMate-Org team :wave: And much, much more. Enjoy it.
 
-**Regarding PostgreSQL 17:** TeslaMate uses PostgreSQL as database, this is an external dependency and needs to be updated by yourself. Although TeslaMate currently runs fine with PostgreSQL 12+ we strongly recommend upgrading to the latest supported version. We recommend that you do this as follows:
+**Regarding PostgreSQL 17:** TeslaMate uses PostgreSQL as database, this is an external dependency and needs to be updated by yourself. Although TeslaMate currently runs fine with PostgreSQL 14+ we strongly recommend upgrading to the latest supported version. We recommend that you do this as follows:
 
 - [Backup your data](https://docs.teslamate.org/docs/maintenance/backup_restore#backup)
 - [Upgrade TeslaMate to this version](https://docs.teslamate.org/docs/upgrading)
@@ -2350,7 +2415,7 @@ New users need to sign in via the web interface.
 
 ## [1.0.0] - 2019-07-25
 
-[unreleased]: https://github.com/teslamate-org/teslamate/compare/v1.33.0...HEAD
+[2.0.0]: https://github.com/teslamate-org/teslamate/compare/v1.33.0...v2.0.0
 [1.33.0]: https://github.com/teslamate-org/teslamate/compare/v1.32.0...v1.33.0
 [1.32.0]: https://github.com/teslamate-org/teslamate/compare/v1.31.1...v1.32.0
 [1.31.1]: https://github.com/teslamate-org/teslamate/compare/v1.31.0...v1.31.1

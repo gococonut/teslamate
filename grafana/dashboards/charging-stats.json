@@ -96,37 +96,35 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "TeslaMate"
           },
+          "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT\n\tcount(*)\nFROM\n\tcharging_processes\nWHERE\n\t$__timeFilter(end_date)\n\tAND charge_energy_added > 0.01\n\tAND car_id = $car_id;",
           "refId": "A",
-          "select": [
-            [
+          "sql": {
+            "columns": [
               {
-                "params": ["efficiency"],
-                "type": "column"
+                "parameters": [],
+                "type": "function"
               }
-            ]
-          ],
-          "table": "cars",
-          "timeColumn": "inserted_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "title": "# 充电次数",
@@ -178,37 +176,35 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "TeslaMate"
           },
+          "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT\n\tsum(charge_energy_added)\nFROM\n\tcharging_processes\nWHERE\n\t$__timeFilter(end_date)\n\tAND car_id = $car_id;\n",
           "refId": "A",
-          "select": [
-            [
+          "sql": {
+            "columns": [
               {
-                "params": ["efficiency"],
-                "type": "column"
+                "parameters": [],
+                "type": "function"
               }
-            ]
-          ],
-          "table": "cars",
-          "timeColumn": "inserted_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "title": "总充电电量",
@@ -261,37 +257,35 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "TeslaMate"
           },
+          "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT\n\tCOALESCE(sum(cp.cost),0)\nFROM\n\tcharging_processes cp\nLEFT JOIN \n\taddresses addr ON addr.id = address_id\nLEFT JOIN\n  geofences geo ON geo.id = geofence_id\nJOIN\n  charges char ON char.charging_process_id = cp.id AND char.date = end_date\t\nWHERE\n  $__timeFilter(end_date)\n  AND (addr.name ILIKE '%supercharger%' OR geo.name ILIKE '%supercharger%' OR char.fast_charger_brand = 'Tesla')\n\tAND NULLIF(char.charger_phases, 0) IS NULL\n\tAND char.fast_charger_type != 'ACSingleWireCAN'\n\tAND cp.cost IS NOT NULL\n\tAND cp.car_id = $car_id;",
           "refId": "A",
-          "select": [
-            [
+          "sql": {
+            "columns": [
               {
-                "params": ["latitude"],
-                "type": "column"
+                "parameters": [],
+                "type": "function"
               }
-            ]
-          ],
-          "table": "addresses",
-          "timeColumn": "inserted_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "title": "超充费用",
@@ -344,37 +338,35 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "TeslaMate"
           },
+          "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT\n\tsum(cost)\nFROM\n\tcharging_processes\nWHERE\n\t$__timeFilter(end_date)\n\tAND car_id = $car_id;",
           "refId": "A",
-          "select": [
-            [
+          "sql": {
+            "columns": [
               {
-                "params": ["latitude"],
-                "type": "column"
+                "parameters": [],
+                "type": "function"
               }
-            ]
-          ],
-          "table": "addresses",
-          "timeColumn": "inserted_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "title": "总充电费用",
@@ -423,7 +415,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
@@ -432,19 +424,9 @@
           },
           "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT (\n  SELECT sum(cost)\n  FROM charging_processes\n  WHERE $__timeFilter(end_date) AND car_id = $car_id\n) / (\n\tSELECT convert_km((max(end_km) - min(start_km))::numeric, '$length_unit')\n\tFROM drives\n\tWHERE $__timeFilter(end_date) AND car_id = $car_id\n) * 100",
           "refId": "A",
-          "select": [
-            [
-              {
-                "params": ["efficiency"],
-                "type": "column"
-              }
-            ]
-          ],
           "sql": {
             "columns": [
               {
@@ -461,17 +443,7 @@
               }
             ],
             "limit": 50
-          },
-          "table": "cars",
-          "timeColumn": "inserted_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+          }
         }
       ],
       "title": "Ø 费用每百 $length_unit",
@@ -522,29 +494,35 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "TeslaMate"
           },
+          "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT (\n  SELECT sum(cost)\n  FROM charging_processes\n  WHERE $__timeFilter(end_date) AND car_id = $car_id\n) / (\n  SELECT sum(greatest(charge_energy_added, charge_energy_used))\n  FROM charging_processes\n  WHERE $__timeFilter(end_date) AND car_id = $car_id\n)",
           "refId": "A",
-          "table": "drives",
-          "timeColumn": "start_date",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "title": "Ø 费用每 kWh",
@@ -595,7 +573,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
@@ -604,8 +582,6 @@
           },
           "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "WITH data AS (\n  SELECT\n\t\tcp.id,\n    cp.cost,\n    cp.end_date,\n    cp.car_id,\n    cp.charge_energy_added,\n    cp.charge_energy_used,\n\t\tCASE WHEN NULLIF(mode() within group (order by charger_phases),0) is null THEN 'DC'\n\t\t\t\t ELSE 'AC'\n\t\tEND AS current\n\tFROM charging_processes cp\n  RIGHT JOIN charges ON cp.id = charges.charging_process_id\n  WHERE\n\t  cp.car_id = $car_id\n\t  AND $__timeFilter(end_date)\n  GROUP BY 1\n)\nSELECT (\n  SELECT \n    sum(cost)\n  FROM data\n  WHERE $__timeFilter(end_date) AND car_id = $car_id AND current = 'DC'\n)/(\n SELECT sum(greatest(charge_energy_added, charge_energy_used))\n  FROM data\n  WHERE $__timeFilter(end_date) AND car_id = $car_id AND current = 'DC'\n  )",
           "refId": "A",
@@ -625,17 +601,7 @@
               }
             ],
             "limit": 50
-          },
-          "table": "drives",
-          "timeColumn": "start_date",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+          }
         }
       ],
       "title": "Ø 费用每 kWh DC",
@@ -686,7 +652,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
@@ -695,8 +661,6 @@
           },
           "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "WITH data AS (\n  SELECT\n\t\tcp.id,\n    cp.cost,\n    cp.end_date,\n    cp.car_id,\n    cp.charge_energy_added,\n    cp.charge_energy_used,\n\t\tCASE WHEN NULLIF(mode() within group (order by charger_phases),0) is null THEN 'DC'\n\t\t\t\t ELSE 'AC'\n\t\tEND AS current\n\tFROM charging_processes cp\n  RIGHT JOIN charges ON cp.id = charges.charging_process_id\n  WHERE\n\t  cp.car_id = $car_id\n\t  AND $__timeFilter(end_date)\n  GROUP BY 1\n)\nSELECT (\n  SELECT \n    sum(cost)\n  FROM data\n  WHERE $__timeFilter(end_date) AND car_id = $car_id AND current = 'AC'\n)/(\n SELECT sum(greatest(charge_energy_added, charge_energy_used))\n  FROM data\n  WHERE $__timeFilter(end_date) AND car_id = $car_id AND current = 'AC'\n  )",
           "refId": "A",
@@ -716,17 +680,7 @@
               }
             ],
             "limit": 50
-          },
-          "table": "drives",
-          "timeColumn": "start_date",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+          }
         }
       ],
       "title": "Ø 费用每 kWh AC",
@@ -805,37 +759,35 @@
           "unit": "short"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "TeslaMate"
           },
+          "editorMode": "code",
           "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT\n\t$__time(start_date),\n\tstart_battery_level,\n\tend_battery_level\nFROM\n\tcharging_processes\nWHERE\n\t$__timeFilter(start_date)\n\tAND duration_min > 3\n\tAND car_id = $car_id\nORDER BY\n\tstart_date;",
           "refId": "A",
-          "select": [
-            [
+          "sql": {
+            "columns": [
               {
-                "params": ["charge_energy_added"],
-                "type": "column"
+                "parameters": [],
+                "type": "function"
               }
-            ]
-          ],
-          "table": "charges",
-          "timeColumn": "date",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "timeFrom": "6M",
@@ -961,37 +913,35 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "TeslaMate"
           },
+          "editorMode": "code",
           "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "WITH charges AS (\n\tSELECT\n\t\tstart_date,\n\t\tstart_battery_level,\n\t\tend_battery_level,\n\t\tp.odometer,\n\t\tCOALESCE(\n\t\t\tLAG(p.odometer) OVER (\n\t\t\t\tORDER BY cp.start_date\n\t\t\t),\n\t\t\tp.odometer\n\t\t) as odometer_prev\n\tFROM\n\t\tcharging_processes cp\n\tJOIN positions p\n\tON p.id = cp.position_id\n\tWHERE\n\t\t$__timeFilter(cp.start_date)\n\t\tAND cp.duration_min > 3\n\t\tAND cp.car_id = $car_id\n)\nSELECT\n\tMIN(start_date) as time,\n\tMIN(start_battery_level) as \"Start SOC\",\n\tMAX(end_battery_level) as \"End SOC\"\nFROM charges\nGROUP BY\n\tCASE WHEN odometer - odometer_prev < 2 THEN odometer_prev ELSE odometer END\nORDER BY\n\ttime;",
           "refId": "A",
-          "select": [
-            [
+          "sql": {
+            "columns": [
               {
-                "params": ["charge_energy_added"],
-                "type": "column"
+                "parameters": [],
+                "type": "function"
               }
-            ]
-          ],
-          "table": "charges",
-          "timeColumn": "date",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         },
         {
           "datasource": {
@@ -1000,7 +950,6 @@
           },
           "editorMode": "code",
           "format": "table",
-          "hide": false,
           "rawQuery": true,
           "rawSql": "SELECT\r\n  20 as lower,\r\n  CASE WHEN lfp_battery THEN 100 ELSE 80 END as upper\r\nfrom cars inner join car_settings on cars.settings_id = car_settings.id\r\nwhere cars.id = $car_id",
           "refId": "B",
@@ -1143,7 +1092,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
@@ -1152,19 +1101,9 @@
           },
           "editorMode": "code",
           "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "WITH data AS (\n  SELECT\n\t\tcp.id,\n\t\tcp.charge_energy_added,\n\t\tCASE WHEN NULLIF(mode() within group (order by charger_phases),0) is null THEN 'DC'\n\t\t\t\t ELSE 'AC'\n\t\tEND AS current,\n\t\tcp.charge_energy_used\n\tFROM charging_processes cp\n  RIGHT JOIN charges ON cp.id = charges.charging_process_id\n  WHERE\n\t  cp.car_id = $car_id\n\t  AND cp.charge_energy_added > 0.01\n\t  AND $__timeFilter(start_date)\n  GROUP BY 1,2\n)\nSELECT\n\tnow() AS time,\n\tSUM(GREATEST(charge_energy_added, charge_energy_used)) AS value,\n\tcurrent AS metric\nFROM data\nGROUP BY 3\nORDER BY metric DESC;",
           "refId": "A",
-          "select": [
-            [
-              {
-                "params": ["latitude"],
-                "type": "column"
-              }
-            ]
-          ],
           "sql": {
             "columns": [
               {
@@ -1181,17 +1120,7 @@
               }
             ],
             "limit": 50
-          },
-          "table": "addresses",
-          "timeColumn": "inserted_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+          }
         }
       ],
       "title": "AC/DC - 电量使用饼图",
@@ -1341,7 +1270,7 @@
           "zoom": 15
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
@@ -1350,19 +1279,9 @@
           },
           "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "WITH charge_data AS (\r\nSELECT COALESCE(geofence.name, CONCAT_WS(', ', COALESCE(address.name, nullif(CONCAT_WS(' ', address.road, address.house_number), '')), address.city)) AS loc_nm\r\n, AVG(position.latitude) AS latitude\r\n, AVG(position.longitude) AS longitude\r\n, sum(charge.charge_energy_added) AS chg_total\r\n, count(*) as charges\r\nFROM charging_processes charge\r\nLEFT JOIN addresses address ON charge.address_id = address.id\r\nLEFT JOIN positions position ON charge.position_id = position.id\r\nLEFT JOIN geofences geofence ON charge.geofence_id = geofence.id\r\nWHERE $__timeFilter(charge.start_date) \r\nAND charge.car_id = $car_id\r\nGROUP BY COALESCE(geofence.name, CONCAT_WS(', ', COALESCE(address.name, nullif(CONCAT_WS(' ', address.road, address.house_number), '')), address.city))\r\n) \r\nSELECT loc_nm\r\n\t,latitude\r\n\t,longitude\r\n\t,chg_total\r\n\t,chg_total * 1.0 / (SELECT sum(chg_total) FROM charge_data) * 100   AS pct\r\n\t,charges\r\nFROM charge_data",
           "refId": "A",
-          "select": [
-            [
-              {
-                "params": ["efficiency"],
-                "type": "column"
-              }
-            ]
-          ],
           "sql": {
             "columns": [
               {
@@ -1379,17 +1298,7 @@
               }
             ],
             "limit": 50
-          },
-          "table": "cars",
-          "timeColumn": "inserted_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+          }
         }
       ],
       "title": "充电热力图 kWh",
@@ -1479,37 +1388,35 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "TeslaMate"
           },
+          "editorMode": "code",
           "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "WITH data AS (\n  SELECT\n\t\tcp.id,\n\t\tcp.duration_min,\n\t\tCASE WHEN NULLIF(mode() within group (order by charger_phases),0) is null THEN 'DC'\n\t\t\t\t ELSE 'AC'\n\t\tEND AS current\n\tFROM charging_processes cp\n  RIGHT JOIN charges ON cp.id = charges.charging_process_id\n  WHERE\n\t  cp.car_id = $car_id\n\t  AND cp.charge_energy_added > 0.01\n\t  AND $__timeFilter(start_date)\n  GROUP BY 1,2\n)\nSELECT\n\tnow() AS time,\n\tsum(duration_min) * 60 AS value,\n\tcurrent AS metric\nFROM data\nGROUP BY 3\nORDER BY metric DESC;",
           "refId": "A",
-          "select": [
-            [
+          "sql": {
+            "columns": [
               {
-                "params": ["latitude"],
-                "type": "column"
+                "parameters": [],
+                "type": "function"
               }
-            ]
-          ],
-          "table": "addresses",
-          "timeColumn": "inserted_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "title": "AC/DC - 时长",
@@ -1695,30 +1602,18 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
-          "alias": "",
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "TeslaMate"
           },
           "editorMode": "code",
           "format": "table",
-          "group": [],
-          "hide": false,
-          "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  c.battery_level as \"SoC\",\r\n  round(avg(c.charger_power), 0) as \"Power\",\r\n  c.charging_process_id as \"charging_process_id\",\r\n  p.start_date as \"start_date\",\r\n  p.end_date as \"end_date\",\r\n  COALESCE(g.name, a.name) || ' ' || to_char(c.date, 'YYYY-MM-dd') as \"Charge\"\r\nFROM\r\n  charges c\r\nJOIN charging_processes p ON p.id = c.charging_process_id \r\nJOIN addresses a ON a.id = p.address_id\r\nLEFT JOIN geofences g ON g.id = p.geofence_id\r\nWHERE\r\n  $__timeFilter(date)\r\n AND p.car_id = $car_id\r\n AND charger_power > 0\r\n AND c.fast_charger_present\r\nGROUP BY c.battery_level, c.charging_process_id, a.name, g.name, p,start_date, p.end_date, to_char(c.date, 'YYYY-MM-dd')",
+          "rawSql": "SELECT\r\n  c.battery_level as \"SoC\",\r\n  round(avg(c.charger_power), 0) as \"Power\",\r\n  c.charging_process_id as \"charging_process_id\",\r\n  p.start_date as \"start_date\",\r\n  p.end_date as \"end_date\",\r\n  COALESCE(g.name, a.name) || ' ' || to_char(timezone('$__timezone', timezone('UTC', c.date)), 'YYYY-MM-dd') as \"Charge\"\r\nFROM\r\n  charges c\r\nJOIN charging_processes p ON p.id = c.charging_process_id \r\nJOIN addresses a ON a.id = p.address_id\r\nLEFT JOIN geofences g ON g.id = p.geofence_id\r\nWHERE\r\n  $__timeFilter(date)\r\n AND p.car_id = $car_id\r\n AND charger_power > 0\r\n AND c.fast_charger_present\r\nGROUP BY c.battery_level, c.charging_process_id, a.name, g.name, p,start_date, p.end_date, to_char(timezone('$__timezone', timezone('UTC', c.date)), 'YYYY-MM-dd')",
           "refId": "A",
-          "select": [
-            [
-              {
-                "params": ["value"],
-                "type": "column"
-              }
-            ]
-          ],
           "sql": {
             "columns": [
               {
@@ -1735,15 +1630,7 @@
               }
             ],
             "limit": 50
-          },
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+          }
         },
         {
           "datasource": {
@@ -1752,20 +1639,9 @@
           },
           "editorMode": "code",
           "format": "table",
-          "group": [],
-          "hide": false,
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT\n  c.battery_level as \"SoC\",\n  PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY charger_power) as \"Power\"\nFROM\n  charges c\njoin\n  charging_processes p ON p.id = c.charging_process_id \nWHERE\n  $__timeFilter(date)\n AND p.car_id = $car_id\n AND charger_power > 0\n AND c.fast_charger_present\nGROUP BY battery_level",
           "refId": "B",
-          "select": [
-            [
-              {
-                "params": ["efficiency"],
-                "type": "column"
-              }
-            ]
-          ],
           "sql": {
             "columns": [
               {
@@ -1782,17 +1658,7 @@
               }
             ],
             "limit": 50
-          },
-          "table": "cars",
-          "timeColumn": "inserted_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+          }
         }
       ],
       "title": "DC 充电功率折线图",
@@ -1901,35 +1767,35 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "TeslaMate"
           },
+          "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT\n\tROUND(end_battery_level / 5, 0) * 5 AS SOC,\n\tcount(*) AS n\nFROM\n\tcharging_processes\nWHERE\n\t$__timeFilter(end_date)\n\tAND duration_min > 3\n\tAND car_id = $car_id\nGROUP BY\n\tROUND(end_battery_level / 5, 0) * 5\nORDER BY\n\tSOC DESC",
           "refId": "A",
-          "select": [
-            [
+          "sql": {
+            "columns": [
               {
-                "params": ["value"],
-                "type": "column"
+                "parameters": [],
+                "type": "function"
               }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         },
         {
           "datasource": {
@@ -1938,7 +1804,6 @@
           },
           "editorMode": "code",
           "format": "table",
-          "hide": false,
           "rawQuery": true,
           "rawSql": "SELECT\r\n  CASE WHEN lfp_battery THEN 100 ELSE 81 END as high,\r\n  CASE WHEN lfp_battery THEN 100 ELSE 91 END as highest\r\nfrom cars inner join car_settings on cars.settings_id = car_settings.id\r\nwhere cars.id = $car_id",
           "refId": "B",
@@ -2113,35 +1978,35 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "TeslaMate"
           },
+          "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT\n\tROUND(start_battery_level / 5, 0) * 5 AS SOC,\n\tcount(*) AS n\nFROM\n\tcharging_processes\nWHERE\n\t$__timeFilter(end_date)\n\tAND duration_min > 3\n\tAND car_id = $car_id\nGROUP BY\n  1\nORDER BY\n\tSOC DESC",
           "refId": "A",
-          "select": [
-            [
+          "sql": {
+            "columns": [
               {
-                "params": ["value"],
-                "type": "column"
+                "parameters": [],
+                "type": "function"
               }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "title": "放电数据",
@@ -2235,7 +2100,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
@@ -2244,19 +2109,9 @@
           },
           "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT\n\tCOALESCE(geofence.name, CONCAT_WS(', ', COALESCE(address.name, nullif(CONCAT_WS(' ', address.road, address.house_number), '')), address.city)) AS location,\n  sum(charge_energy_added) as charge_energy_added\nFROM\n\tcharging_processes c\nLEFT JOIN addresses address ON c.address_id = address.id\nLEFT JOIN geofences geofence ON geofence_id = geofence.id\nWHERE\n\t$__timeFilter(end_date)\n\tAND car_id = $car_id\nGROUP BY\n\t1\nORDER BY\n\tSUM(charge_energy_added) DESC\nLIMIT 17;",
           "refId": "A",
-          "select": [
-            [
-              {
-                "params": ["value"],
-                "type": "column"
-              }
-            ]
-          ],
           "sql": {
             "columns": [
               {
@@ -2273,15 +2128,7 @@
               }
             ],
             "limit": 50
-          },
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+          }
         }
       ],
       "title": "充电站排行 (充电量)",
@@ -2371,37 +2218,35 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "TeslaMate"
           },
+          "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT\n\tCOALESCE(geofence.name, CONCAT_WS(', ', COALESCE(address.name, CONCAT_WS(' ', address.road, address.house_number)), address.city)) AS location,\n\tsum(cost) as cost\nFROM\n\tcharging_processes c\n\tLEFT JOIN addresses address ON c.address_id = address.id\n\tLEFT JOIN geofences geofence ON geofence_id = geofence.id\nWHERE\n  $__timeFilter(end_date) AND\n\tcar_id = $car_id AND\n\tCOST IS NOT NULL\nGROUP BY\n\t1\nORDER BY\n\t2 DESC NULLS LAST\nLIMIT 17;",
           "refId": "A",
-          "select": [
-            [
+          "sql": {
+            "columns": [
               {
-                "params": ["efficiency"],
-                "type": "column"
+                "parameters": [],
+                "type": "function"
               }
-            ]
-          ],
-          "table": "cars",
-          "timeColumn": "inserted_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "title": "充电站排行 (费用)",

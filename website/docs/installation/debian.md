@@ -10,7 +10,7 @@ This document provides the necessary steps for installation of TeslaMate on a va
 Click on the following items to view detailed installation steps.
 
 <details>
-  <summary>Postgres (v17+)</summary>
+  <summary>Postgres (v17.3+)</summary>
 
 ```bash
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
@@ -37,7 +37,7 @@ Source: [erlang.org/downloads](https://www.erlang.org/downloads#prebuilt)
 </details>
 
 <details>
-  <summary>Grafana (v11.5.0+)</summary>
+  <summary>Grafana (v11.6.1+)</summary>
 
 ```bash
 sudo apt-get install -y apt-transport-https software-properties-common
@@ -258,7 +258,7 @@ screen -S teslamate -L -dm bash -c "cd /usr/src/teslamate; ./start.sh; exec sh"
    Version: 10
    ```
 
-3. [Manually import](https://grafana.com/docs/reference/export_import/#importing-a-dashboard) the dashboard [files](https://github.com/teslamate-org/teslamate/tree/master/grafana/dashboards) or use the `dashboards.sh` script:
+3. [Manually import](https://grafana.com/docs/reference/export_import/#importing-a-dashboard) the dashboard [files](https://github.com/teslamate-org/teslamate/tree/main/grafana/dashboards) or use the `dashboards.sh` script:
 
    ```bash
    $ ./grafana/dashboards.sh restore
