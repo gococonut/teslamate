@@ -7,7 +7,7 @@ sidebar_label: Development and Contributing
 ## Requirements
 
 - **Elixir** >= 1.17.3-otp-26
-- **Postgres** >= 17
+- **Postgres** >= 17.3
 - An **MQTT broker** e.g. mosquitto (_optional_)
 - **NodeJS** >= 20.15.0
 
@@ -53,10 +53,16 @@ mix compile
 
 ### Format all files
 
-Install [Treefmt](https://github.com/numtide/treefmt/releases) or use the nix devenv (via direnv) setup.
+Install [Treefmt](https://github.com/numtide/treefmt/releases) or use nix develop or the nix devenv (via direnv) setup.
 
 ```bash
 treefmt
+```
+
+or with nix, when not using direnv:
+
+```bash
+nix develop --override-input devenv-root "file+file://"<(printf %s "$PWD") . --command treefmt
 ```
 
 You can even use a VS Code extension like [treefmt](https://marketplace.visualstudio.com/items?itemName=ibecker.treefmt-vscode) to format the files on save.
@@ -82,7 +88,7 @@ To ensure a commit passes CI you should run `mix ci` locally, which executes the
 
 ### Testing with our CI which builds the Docker images automatically per PR
 
-Our CI automatically builds the Docker images for each PR. To test the changes introduce by a PR you can edit your docker-compose.yml file as follows (replace `pr-3836` with the PR number):
+Our CI automatically builds the Docker images for each PR (only for repo own PRs, not for external PRs). To test the changes introduce by a PR you can edit your docker-compose.yml file as follows (replace `pr-3836` with the PR number):
 
 For TeslaMate:
 
@@ -151,8 +157,10 @@ Datetime values are currently stored in columns of type `timestamp`. [This is NO
 
 While [Grafana macros](https://grafana.com/docs/grafana/latest/datasources/postgres/#macros) like `$__timeFilter` & `$__timeGroup` are working PostgreSQL functions like `DATE_TRUNC()` require additional treatment.
 
+Grafana is not setting the PostgreSQL session timezone. To ensure truncation is done with respect to the Grafana timezone setting set the [optional time_zone argument](https://www.postgresql.org/docs/current/functions-datetime.html#FUNCTIONS-DATETIME-TRUNC) for `DATE_TRUNC()`.
+
 ```sql
-DATE_TRUNC('day', TIMEZONE('UTC', date))
+DATE_TRUNC('day', TIMEZONE('UTC', date), '$__timezone')
 ```
 
 In addition ensure to compare either values with or without time zone.

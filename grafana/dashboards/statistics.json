@@ -29,7 +29,9 @@
     {
       "asDropdown": true,
       "icon": "external link",
-      "tags": ["tesla"],
+      "tags": [
+        "tesla"
+      ],
       "title": "Dashboards",
       "type": "dashboards"
     }
@@ -80,7 +82,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "驾驶时长"
+              "options": "Time driven"
             },
             "properties": [
               {
@@ -100,7 +102,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "周期"
+              "options": "Period"
             },
             "properties": [
               {
@@ -122,7 +124,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "效率"
+              "options": "Driving Efficiency"
             },
             "properties": [
               {
@@ -171,7 +173,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "电耗"
+              "options": "Energy used"
             },
             "properties": [
               {
@@ -201,7 +203,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Ø 总电耗 / 充电次数"
+              "options": "Ø Energy used / Charge"
             },
             "properties": [
               {
@@ -221,7 +223,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "费用"
+              "options": "Costs"
             },
             "properties": [
               {
@@ -237,7 +239,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "# 充电次数"
+              "options": "# of Charges"
             },
             "properties": [
               {
@@ -259,7 +261,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "# 行程次数"
+              "options": "# of Drives"
             },
             "properties": [
               {
@@ -290,7 +292,7 @@
               },
               {
                 "id": "displayName",
-                "value": "里程"
+                "value": "Distance"
               },
               {
                 "id": "custom.minWidth",
@@ -310,7 +312,7 @@
               },
               {
                 "id": "displayName",
-                "value": "Ø 温度"
+                "value": "Ø Temp"
               },
               {
                 "id": "thresholds",
@@ -351,7 +353,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "里程"
+                "value": "Distance"
               },
               {
                 "id": "unit",
@@ -379,7 +381,7 @@
               },
               {
                 "id": "displayName",
-                "value": "Ø 能耗 (净值)"
+                "value": "Ø Consumption (net)"
               }
             ]
           },
@@ -391,7 +393,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Ø 能耗 (总)"
+                "value": "Ø Consumption (gross)"
               },
               {
                 "id": "unit",
@@ -411,7 +413,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Ø 能耗 (净值)"
+                "value": "Ø Consumption (net)"
               },
               {
                 "id": "unit",
@@ -431,7 +433,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Ø 能耗 (总)"
+                "value": "Ø Consumption (gross)"
               },
               {
                 "id": "unit",
@@ -451,7 +453,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Ø 温度"
+                "value": "Ø Temp"
               },
               {
                 "id": "unit",
@@ -515,7 +517,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Ø 费用 / kWh"
+              "options": "Ø Cost / kWh"
             },
             "properties": [
               {
@@ -545,7 +547,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Ø 费用 / 100 km"
+              "options": "Ø Cost / 100 km"
             },
             "properties": [
               {
@@ -575,7 +577,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "能耗 OH"
+              "options": "Consumption OH"
             },
             "properties": [
               {
@@ -621,7 +623,9 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": ["sum"],
+          "reducer": [
+            "sum"
+          ],
           "show": false
         },
         "frameIndex": 1,
@@ -633,7 +637,7 @@
           }
         ]
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -642,19 +646,9 @@
           },
           "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH data AS (\nSELECT\n  duration_min > 1 AND\n  distance > 1 AND\n  ( \n    start_position.usable_battery_level IS NULL OR\n    (end_position.battery_level - end_position.usable_battery_level) = 0 \n  ) AS is_sufficiently_precise,\n  NULLIF(GREATEST(start_${preferred_range}_range_km - end_${preferred_range}_range_km, 0), 0) AS range_diff,\n  date_trunc('$period', TIMEZONE('UTC', start_date)) as date,\n  drives.*\nFROM drives\n  LEFT JOIN positions start_position ON start_position_id = start_position.id\n  LEFT JOIN positions end_position ON end_position_id = end_position.id)\nSELECT\n  EXTRACT(EPOCH FROM date)*1000 AS date_from,\n  EXTRACT(EPOCH FROM date + interval '1 $period')*1000 AS date_to,\n  CASE '$period'\n    WHEN 'month' THEN to_char(date, 'YYYY Month')\n    WHEN 'year' THEN to_char(date, 'YYYY')\n    WHEN 'week' THEN 'week ' || to_char(date, 'WW') || ' starting ' || to_char(date, 'YYYY-MM-DD')\n    ELSE to_char(date, 'YYYY-MM-DD')\n  END AS display,\n  date,\n  sum(duration_min)*60 AS sum_duration_h, \n  convert_km(max(end_km)::integer - min(start_km)::integer, '$length_unit') AS sum_distance_$length_unit,\n  convert_celsius(avg(outside_temp_avg), '$temp_unit') AS avg_outside_temp_$temp_unit,\n  count(*) AS cnt,\n  sum(distance)/sum(range_diff) AS efficiency\nFROM data WHERE\n  car_id = $car_id AND\n  $__timeFilter(start_date)\nGROUP BY date",
+          "rawSql": "WITH data AS (\nSELECT\n  duration_min > 1 AND\n  distance > 1 AND\n  ( \n    start_position.usable_battery_level IS NULL OR\n    (end_position.battery_level - end_position.usable_battery_level) = 0 \n  ) AS is_sufficiently_precise,\n  start_${preferred_range}_range_km - end_${preferred_range}_range_km AS range_diff,\n  date_trunc('$period', timezone('UTC', start_date), '$__timezone') as date,\n  drives.*\nFROM drives\n  LEFT JOIN positions start_position ON start_position_id = start_position.id\n  LEFT JOIN positions end_position ON end_position_id = end_position.id)\nSELECT\n  EXTRACT(EPOCH FROM date)*1000 AS date_from,\n  EXTRACT(EPOCH FROM date + interval '1 $period')*1000 AS date_to,\n  CASE '$period'\n    WHEN 'month' THEN to_char(timezone('$__timezone', date), 'YYYY Month')\n    WHEN 'year' THEN to_char(timezone('$__timezone', date), 'YYYY')\n    WHEN 'week' THEN 'week ' || to_char(timezone('$__timezone', date), 'WW') || ' starting ' || to_char(timezone('$__timezone', date), 'YYYY-MM-DD')\n    ELSE to_char(timezone('$__timezone', date), 'YYYY-MM-DD')\n  END AS display,\n  date,\n  sum(duration_min)*60 AS sum_duration_h, \n  convert_km(max(end_km)::integer - min(start_km)::integer, '$length_unit') AS sum_distance_$length_unit,\n  convert_celsius(avg(outside_temp_avg), '$temp_unit') AS avg_outside_temp_$temp_unit,\n  count(*) AS cnt,\n  case when sum(range_diff) > 0 then sum(distance)/sum(range_diff) else null end AS efficiency\nFROM data WHERE\n  car_id = $car_id AND\n  $__timeFilter(start_date)\nGROUP BY date",
           "refId": "A",
-          "select": [
-            [
-              {
-                "params": ["start_km"],
-                "type": "column"
-              }
-            ]
-          ],
           "sql": {
             "columns": [
               {
@@ -671,17 +665,7 @@
               }
             ],
             "limit": 50
-          },
-          "table": "drives",
-          "timeColumn": "start_date",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+          }
         },
         {
           "datasource": {
@@ -690,19 +674,9 @@
           },
           "editorMode": "code",
           "format": "table",
-          "group": [],
-          "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH data AS (\n  SELECT\n    charging_processes.*,\n  \tdate_trunc('$period', TIMEZONE('UTC', start_date)) as date\n    FROM charging_processes)\nSELECT\n  EXTRACT(EPOCH FROM date)*1000 AS date_from,\n  EXTRACT(EPOCH FROM date + interval '1 $period')*1000 AS date_to,\n  CASE '$period'\n    WHEN 'month' THEN to_char(date, 'YYYY Month')\n    WHEN 'year' THEN to_char(date, 'YYYY')\n    WHEN 'week' THEN 'week ' || to_char(date, 'WW') || ' starting ' || to_char(date, 'YYYY-MM-DD')\n    ELSE to_char(date, 'YYYY-MM-DD')\n  END AS display,\n  date,\n  sum(greatest(charge_energy_added,charge_energy_used)) AS sum_energy_used_kwh,\n  sum(greatest(charge_energy_added,charge_energy_used)) / count(*) AS avg_energy_charged_kwh,\n  sum(cost) AS cost_charges,\n  count(*) AS cnt_charges\nFROM data WHERE\n  car_id = $car_id AND\n  $__timeFilter(start_date) AND\n  (charge_energy_added IS NULL OR charge_energy_added > 0.1)\nGROUP BY date",
+          "rawSql": "WITH data AS (\n  SELECT\n    charging_processes.*,\n  \tdate_trunc('$period', timezone('UTC', start_date), '$__timezone') as date\n    FROM charging_processes)\nSELECT\n  EXTRACT(EPOCH FROM date)*1000 AS date_from,\n  EXTRACT(EPOCH FROM date + interval '1 $period')*1000 AS date_to,\n  CASE '$period'\n    WHEN 'month' THEN to_char(timezone('$__timezone', date), 'YYYY Month')\n    WHEN 'year' THEN to_char(timezone('$__timezone', date), 'YYYY')\n    WHEN 'week' THEN 'week ' || to_char(timezone('$__timezone', date), 'WW') || ' starting ' || to_char(timezone('$__timezone', date), 'YYYY-MM-DD')\n    ELSE to_char(timezone('$__timezone', date), 'YYYY-MM-DD')\n  END AS display,\n  date,\n  sum(greatest(charge_energy_added,charge_energy_used)) AS sum_energy_used_kwh,\n  sum(charge_energy_added) as sum_energy_added_kwh,\n  sum(greatest(charge_energy_added,charge_energy_used)) / count(*) AS avg_energy_charged_kwh,\n  sum(cost) AS cost_charges,\n  count(*) AS cnt_charges\nFROM data WHERE\n  car_id = $car_id AND\n  $__timeFilter(start_date) AND\n  (charge_energy_added IS NULL OR charge_energy_added > 0.1)\nGROUP BY date",
           "refId": "B",
-          "select": [
-            [
-              {
-                "params": ["value"],
-                "type": "column"
-              }
-            ]
-          ],
           "sql": {
             "columns": [
               {
@@ -719,15 +693,7 @@
               }
             ],
             "limit": 50
-          },
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+          }
         },
         {
           "datasource": {
@@ -736,20 +702,9 @@
           },
           "editorMode": "code",
           "format": "table",
-          "group": [],
-          "hide": false,
-          "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH data AS (\n  SELECT\n    drives.*,\n    date_trunc('$period', TIMEZONE('UTC', start_date)) as date\n  FROM drives)\nSELECT\n  EXTRACT(EPOCH FROM date)*1000 AS date_from,\n  EXTRACT(EPOCH FROM date + interval '1 $period')*1000 AS date_to,\n  CASE '$period'\n    WHEN 'month' THEN to_char(date, 'YYYY Month')\n    WHEN 'year' THEN to_char(date, 'YYYY')\n    WHEN 'week' THEN 'week ' || to_char(date, 'WW') || ' starting ' || to_char(date, 'YYYY-MM-DD')\n    ELSE to_char(date, 'YYYY-MM-DD')\n  END AS display,\n  date,\n  sum(GREATEST(start_${preferred_range}_range_km - end_${preferred_range}_range_km, 0) * car.efficiency * 1000) / \n  convert_km(sum(distance)::numeric, '$length_unit') as consumption_net_$length_unit\nFROM data\nJOIN cars car ON car.id = car_id\nWHERE\n  car_id = $car_id AND\n  $__timeFilter(start_date)\nGROUP BY date",
+          "rawSql": "WITH data AS (\n  SELECT\n    drives.*,\n    date_trunc('$period', timezone('UTC', start_date), '$__timezone') as date\n  FROM drives)\nSELECT\n  EXTRACT(EPOCH FROM date)*1000 AS date_from,\n  EXTRACT(EPOCH FROM date + interval '1 $period')*1000 AS date_to,\n  CASE '$period'\n    WHEN 'month' THEN to_char(timezone('$__timezone', date), 'YYYY Month')\n    WHEN 'year' THEN to_char(timezone('$__timezone', date), 'YYYY')\n    WHEN 'week' THEN 'week ' || to_char(timezone('$__timezone', date), 'WW') || ' starting ' || to_char(timezone('$__timezone', date), 'YYYY-MM-DD')\n    ELSE to_char(timezone('$__timezone', date), 'YYYY-MM-DD')\n  END AS display,\n  date,\n  sum((start_${preferred_range}_range_km - end_${preferred_range}_range_km) * car.efficiency * 1000) / \n  convert_km(sum(distance)::numeric, '$length_unit') as consumption_net_$length_unit\nFROM data\nJOIN cars car ON car.id = car_id\nWHERE\n  car_id = $car_id AND\n  $__timeFilter(start_date)\nGROUP BY date",
           "refId": "C",
-          "select": [
-            [
-              {
-                "params": ["value"],
-                "type": "column"
-              }
-            ]
-          ],
           "sql": {
             "columns": [
               {
@@ -766,15 +721,7 @@
               }
             ],
             "limit": 50
-          },
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
+          }
         },
         {
           "datasource": {
@@ -783,9 +730,8 @@
           },
           "editorMode": "code",
           "format": "table",
-          "hide": false,
           "rawQuery": true,
-          "rawSql": "with drives_start_event as (\n\n    select\n        'drive_start' as event, start_date as date, start_${preferred_range}_range_km as range, start_km as odometer, car_id\n    from drives\n    where car_id = $car_id and $__timeFilter(start_date) and 0 = $high_precision\n\n),\n\ndrives_end_event as (\n\n    select\n        'drive_end' as event, end_date as date, end_${preferred_range}_range_km as range, end_km as odometer, car_id\n    from drives\n    where car_id = $car_id and $__timeFilter(end_date) and 0 = $high_precision\n\n),\n\ncharging_processes_start_event as (\n\n    select\n        'charging_process_start' as event, start_date as date, start_${preferred_range}_range_km as range, p.odometer, cp.car_id\n    from charging_processes cp\n        inner join positions p on cp.position_id = p.id\n    where cp.car_id = $car_id and $__timeFilter(start_date) and 0 = $high_precision\n\n),\n\ncharging_processes_end_event as (\n\n    select\n        'charging_process_end' as event, end_date as date, end_${preferred_range}_range_km as range, p.odometer, cp.car_id\n    from charging_processes cp\n        inner join positions p on cp.position_id = p.id\n    where cp.car_id = $car_id and $__timeFilter(end_date) and 0 = $high_precision\n\n),\n\npositions as (\n\n    select\n        case\n            when drive_id is not null and lead(drive_id) over w is not null then 'drive_start'\n            else 'something'\n        end as event,\n        date, ${preferred_range}_battery_range_km as range, p.odometer, p.car_id\n    from positions p\n    where ideal_battery_range_km is not null and car_id = $car_id and $__timeFilter(date) and 1 = $high_precision\n    window w as (order by date)\n\n),\n\ncombined as (\n\n    select * from drives_start_event\n    union all\n    select * from drives_end_event\n    union all\n    select * from charging_processes_start_event\n    union all\n    select * from charging_processes_end_event\n    union all\n    select * from positions\n\n),\n\nfinal as (\n\n    select\n        car_id,\n        date_trunc('$period', timezone('UTC', date)) as date,\n        lead(odometer) over w - odometer as distance,\n        case when event != 'drive_start' then greatest(range - lead(range) over w, 0) else range - lead(range) over w end as range_loss\n    from combined\n    window w as (order by date asc)\n\n)\n\nselect\n    EXTRACT(EPOCH FROM date)*1000 AS date_from,\n    EXTRACT(EPOCH FROM date + interval '1 $period')*1000 AS date_to,\n    CASE '$period'\n        WHEN 'month' THEN to_char(date, 'YYYY Month')\n        WHEN 'year' THEN to_char(date, 'YYYY')\n        WHEN 'week' THEN 'week ' || to_char(date, 'WW') || ' starting ' || to_char(date, 'YYYY-MM-DD')\n        ELSE to_char(date, 'YYYY-MM-DD')\n    END AS display,\n    date,\n    (sum(range_loss) * c.efficiency * 1000) / nullif(convert_km(sum(distance)::numeric, '$length_unit'), 0) as consumption_gross_$length_unit\nfrom final\n    inner join cars c on car_id = c.id\ngroup by 1, 2, 3, 4, c.efficiency",
+          "rawSql": "-- Query shared between Charging Stats, Statistics & Trip Dashboards (with minor changes) - ensure to modify in all places when necessary\n\nwith drives_start_event as (\n\n    select\n        'drive_start' as event, start_date as date, start_${preferred_range}_range_km as range, start_km as odometer, car_id\n    from drives\n    where car_id = $car_id and $__timeFilter(start_date) and 0 = $high_precision\n\n),\n\ndrives_end_event as (\n\n    select\n        'drive_end' as event, end_date as date, end_${preferred_range}_range_km as range, end_km as odometer, car_id\n    from drives\n    where car_id = $car_id and $__timeFilter(start_date) and 0 = $high_precision\n\n),\n\ncharging_processes_start_event as (\n\n    select\n        'charging_process_start' as event, start_date as date, start_${preferred_range}_range_km as range, p.odometer, cp.car_id\n    from charging_processes cp\n        inner join positions p on cp.position_id = p.id\n    where cp.car_id = $car_id and $__timeFilter(start_date) and 0 = $high_precision\n\n),\n\ncharging_processes_end_event as (\n\n    select\n        'charging_process_end' as event, end_date as date, end_${preferred_range}_range_km as range, p.odometer, cp.car_id\n    from charging_processes cp\n        inner join positions p on cp.position_id = p.id\n    where cp.car_id = $car_id and $__timeFilter(start_date) and 0 = $high_precision\n\n),\n\npositions as (\n\n    select\n        case\n            when drive_id is not null and lead(drive_id) over w is not null then 'drive_start'\n            else 'something'\n        end as event,\n        date, ${preferred_range}_battery_range_km as range, p.odometer, p.car_id\n    from positions p\n    where ideal_battery_range_km is not null and car_id = $car_id and 1 = $high_precision\n    and (drive_id in (select id from drives where $__timeFilter(start_date)) or drive_id is null and $__timeFilter(date))\n    window w as (order by date)\n\n),\n\ncombined as (\n\n    select * from drives_start_event\n    union all\n    select * from drives_end_event\n    union all\n    select * from charging_processes_start_event\n    union all\n    select * from charging_processes_end_event\n    union all\n    select * from positions\n\n),\n\nfinal as (\n\n    select\n        car_id,\n        date_trunc('$period', timezone('UTC', date), '$__timezone') as date,\n        lead(odometer) over w - odometer as distance,\n        case when event != 'drive_start' then greatest(range - lead(range) over w, 0) else range - lead(range) over w end as range_loss\n    from combined\n    window w as (order by date asc)\n\n)\n\nselect\n    EXTRACT(EPOCH FROM date)*1000 AS date_from,\n    EXTRACT(EPOCH FROM date + interval '1 $period')*1000 AS date_to,\n    CASE '$period'\n        WHEN 'month' THEN to_char(timezone('$__timezone', date), 'YYYY Month')\n        WHEN 'year' THEN to_char(timezone('$__timezone', date), 'YYYY')\n        WHEN 'week' THEN 'week ' || to_char(timezone('$__timezone', date), 'WW') || ' starting ' || to_char(timezone('$__timezone', date), 'YYYY-MM-DD')\n        ELSE to_char(timezone('$__timezone', date), 'YYYY-MM-DD')\n    END AS display,\n    date,\n    (sum(range_loss) * c.efficiency * 1000) / nullif(convert_km(sum(distance)::numeric, '$length_unit'), 0) as consumption_gross_$length_unit\nfrom final\n    inner join cars c on car_id = c.id\ngroup by 1, 2, 3, 4, c.efficiency",
           "refId": "D",
           "sql": {
             "columns": [
@@ -806,7 +752,7 @@
           }
         }
       ],
-      "title": "每 ${period}",
+      "title": "per ${period}",
       "transformations": [
         {
           "id": "merge",
@@ -835,10 +781,19 @@
           "options": {
             "alias": "avg_cost_kwh",
             "binary": {
-              "left": "cost_charges",
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cost_charges"
+                }
+              },
               "operator": "/",
-              "reducer": "sum",
-              "right": "sum_energy_used_kwh"
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sum_energy_used_kwh"
+                }
+              }
             },
             "mode": "binary",
             "reduce": {
@@ -849,12 +804,21 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "avg_cost_km_temp",
+            "alias": "avg_cost_added_kwh",
             "binary": {
-              "left": "cost_charges",
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cost_charges"
+                }
+              },
               "operator": "/",
-              "reducer": "sum",
-              "right": "sum_distance_km"
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sum_energy_added_kwh"
+                }
+              }
             },
             "mode": "binary",
             "reduce": {
@@ -865,12 +829,46 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "avg_cost_mi_temp",
+            "alias": "cost_per_1000km",
             "binary": {
-              "left": "cost_charges",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "sum_distance_mi"
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "consumption_gross_km"
+                }
+              },
+              "operator": "*",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "avg_cost_added_kwh"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "cost_per_1000mi",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "consumption_gross_mi"
+                }
+              },
+              "operator": "*",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "avg_cost_added_kwh"
+                }
+              }
             },
             "mode": "binary",
             "reduce": {
@@ -883,9 +881,16 @@
           "options": {
             "alias": "avg_cost_km",
             "binary": {
-              "left": "avg_cost_km_temp",
-              "operator": "*",
-              "right": "100"
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cost_per_1000km"
+                }
+              },
+              "operator": "/",
+              "right": {
+                "fixed": "10"
+              }
             },
             "mode": "binary",
             "reduce": {
@@ -898,9 +903,16 @@
           "options": {
             "alias": "avg_cost_mi",
             "binary": {
-              "left": "avg_cost_mi_temp",
-              "operator": "*",
-              "right": "100"
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cost_per_1000mi"
+                }
+              },
+              "operator": "/",
+              "right": {
+                "fixed": "10"
+              }
             },
             "mode": "binary",
             "reduce": {
@@ -913,9 +925,19 @@
           "options": {
             "alias": "overhead_pct_km_temp",
             "binary": {
-              "left": "consumption_net_km",
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "consumption_net_km"
+                }
+              },
               "operator": "/",
-              "right": "consumption_gross_km"
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "consumption_gross_km"
+                }
+              }
             },
             "mode": "binary",
             "reduce": {
@@ -928,9 +950,16 @@
           "options": {
             "alias": "overhead_pct_km",
             "binary": {
-              "left": "1",
+              "left": {
+                "fixed": "1"
+              },
               "operator": "-",
-              "right": "overhead_pct_km_temp"
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "overhead_pct_km_temp"
+                }
+              }
             },
             "mode": "binary",
             "reduce": {
@@ -943,9 +972,19 @@
           "options": {
             "alias": "overhead_pct_mi_temp",
             "binary": {
-              "left": "consumption_net_mi",
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "consumption_net_mi"
+                }
+              },
               "operator": "/",
-              "right": "consumption_gross_mi"
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "consumption_gross_mi"
+                }
+              }
             },
             "mode": "binary",
             "reduce": {
@@ -958,9 +997,16 @@
           "options": {
             "alias": "overhead_pct_mi",
             "binary": {
-              "left": "1",
+              "left": {
+                "fixed": "1"
+              },
               "operator": "-",
-              "right": "overhead_pct_mi_temp"
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "overhead_pct_mi_temp"
+                }
+              }
             },
             "mode": "binary",
             "reduce": {
@@ -972,11 +1018,13 @@
           "id": "organize",
           "options": {
             "excludeByName": {
-              "avg_cost_km_temp": true,
-              "avg_cost_mi_temp": true,
+              "avg_cost_added_kwh": true,
+              "cost_per_1000km": true,
+              "cost_per_1000mi": true,
               "date": true,
               "overhead_pct_km_temp": true,
-              "overhead_pct_mi_temp": true
+              "overhead_pct_mi_temp": true,
+              "sum_energy_added_kwh": true
             },
             "includeByName": {},
             "indexByName": {
@@ -1006,30 +1054,30 @@
               "sum_energy_used_kwh": 7
             },
             "renameByName": {
-              "avg_cost_km": "Ø 费用 / 100 km",
-              "avg_cost_kwh": "Ø 费用 / kWh",
-              "avg_cost_mi": "Ø 费用 / 100 mi",
-              "avg_energy_charged_kwh": "Ø 总电耗 / 充电次数",
+              "avg_cost_km": "Ø Cost / 100 km",
+              "avg_cost_kwh": "Ø Cost / kWh",
+              "avg_cost_mi": "Ø Cost / 100 mi",
+              "avg_energy_charged_kwh": "Ø Energy used / Charge",
               "avg_outside_temp_c": "",
               "avg_outside_temp_f": "",
-              "cnt": "# 行程次数",
-              "cnt_charges": "# 充电次数",
+              "cnt": "# of Drives",
+              "cnt_charges": "# of Charges",
               "consumption_gross_km": "",
               "consumption_gross_mi": "",
               "consumption_net_km": "",
               "consumption_net_mi": "",
-              "cost_charges": "费用",
+              "cost_charges": "Costs",
               "date": "",
               "date_from": "",
               "date_to": "",
-              "display": "周期",
-              "efficiency": "效率",
-              "overhead_pct_km": "能耗 OH",
-              "overhead_pct_mi": "能耗 OH",
+              "display": "Period",
+              "efficiency": "Driving Efficiency",
+              "overhead_pct_km": "Consumption OH",
+              "overhead_pct_mi": "Consumption OH",
               "sum_distance_km": "",
               "sum_distance_mi": "",
-              "sum_duration_h": "驾驶时长",
-              "sum_energy_used_kwh": "电耗"
+              "sum_duration_h": "Time driven",
+              "sum_energy_used_kwh": "Energy used"
             }
           }
         }
@@ -1040,7 +1088,9 @@
   "preload": false,
   "refresh": "",
   "schemaVersion": 41,
-  "tags": ["tesla"],
+  "tags": [
+    "tesla"
+  ],
   "templating": {
     "list": [
       {
@@ -1100,7 +1150,7 @@
           "value": "month"
         },
         "includeAll": false,
-        "label": "周期",
+        "label": "Period",
         "name": "period",
         "options": [
           {
@@ -1164,9 +1214,9 @@
           "text": "no",
           "value": "0"
         },
-        "description": "当启用时，\"Ø消耗量（总）\"将通过位置数据而非充电过程和行驶数据进行计算.\n\n虽然此方法更为准确（尤其是在较短时间内），但在硬件性能较低的情况下，计算速度会较慢！",
+        "description": "When enabled \"Ø Consumption (gross)\" will be calculated via Positions instead of Charging Processes and Drives.\n\nWhile being more accurate (especially for shorter periods) this will be slow on slow hardware!",
         "includeAll": false,
-        "label": "高精度",
+        "label": "High Precision",
         "name": "high_precision",
         "options": [
           {
@@ -1191,7 +1241,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "数据汇总",
+  "title": "Statistics",
   "uid": "1EZnXszMk",
   "version": 1
 }
