@@ -133,20 +133,17 @@ func SaveTokenHandler(c *gin.Context) {
 }
 ```
 
-### 4.3 数据库结构
-```sql
-CREATE TABLE tesla_tokens (
-    id SERIAL PRIMARY KEY,
-    access_token TEXT NOT NULL,      -- 加密存储
-    refresh_token TEXT NOT NULL,     -- 加密存储
-    validated_at TIMESTAMP NOT NULL,  -- 验证时间
-    expires_at TIMESTAMP,            -- 过期时间（根据 Tesla API 响应计算）
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+### 4.3 数据库使用
 
--- 审计日志表（记录验证失败的尝试）
-CREATE TABLE token_validation_logs (
+**使用 TeslaMate 现有的数据库**，查看 TeslaMate 的 tokens 表结构并复用：
+
+```sql
+-- TeslaMate 已有的 tokens 表（示例，需要确认实际结构）
+-- 直接使用 TeslaMate 的 tokens 表存储
+-- 如果 TeslaMate 没有专门的 tokens 表，可以在同一个数据库中创建新表
+
+-- 只需要创建一个简单的审计日志表（可选）
+CREATE TABLE IF NOT EXISTS token_validation_logs (
     id SERIAL PRIMARY KEY,
     access_token_hash VARCHAR(64),   -- token 的 hash 值，不存储原文
     valid BOOLEAN NOT NULL,
@@ -154,6 +151,11 @@ CREATE TABLE token_validation_logs (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
+
+**注意**：
+- 连接到 TeslaMate 的 PostgreSQL 数据库
+- 查看 TeslaMate 现有的表结构，优先复用
+- 如果需要新表，使用不冲突的表名
 
 ## 五、Tesla API 集成
 
@@ -225,7 +227,7 @@ User-Agent: TeslaMateTokenService/1.0
 ## 八、环境配置
 
 ```env
-# 数据库
+# 数据库 - 使用 TeslaMate 的数据库连接
 DATABASE_URL=postgresql://teslamate:password@localhost/teslamate
 
 # 加密
@@ -257,12 +259,17 @@ GIN_MODE=release
 
 ## 十、与 TeslaMate 集成
 
-1. **TeslaMate 调用流程**：
+1. **数据库共享**：
+   - 使用 TeslaMate 的 PostgreSQL 实例
+   - 复用 TeslaMate 的数据库连接配置
+   - 查看并使用 TeslaMate 现有的 token 存储机制
+
+2. **TeslaMate 调用流程**：
    - 用户获取 token（通过第三方工具）
    - 调用本服务保存 token（自动验证）
-   - TeslaMate 从本服务获取已验证的 token
+   - TeslaMate 从数据库读取已验证的 token
 
-2. **失败处理**：
+3. **失败处理**：
    - 如果 token 无效，用户需要重新获取
    - 本服务只存储有效的 token
 
