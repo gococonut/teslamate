@@ -4,6 +4,11 @@
 
 开发一个 Gin 服务，在保存 Token 前先验证其有效性，只有有效的 Token 才能保存。
 
+**关键约束**：
+- 不创建新的数据库表，完全复用 TeslaMate 的表结构
+- 必须在 TeslaMate 启动并创建好数据库表之后才能启动本服务
+- 加密/解密方式必须与 TeslaMate 完全一致
+
 ## 二、Token 验证流程
 
 ### 2.1 验证步骤
@@ -135,40 +140,31 @@ func SaveTokenHandler(c *gin.Context) {
 
 ### 4.3 数据库使用
 
-**重要**：TeslaMate 使用加密方式存储 token，我们的服务应该与 TeslaMate 的存储方式保持一致。
+**重要原则**：
+- **不创建新表**，直接使用 TeslaMate 创建的表结构
+- **服务启动顺序**：必须等 TeslaMate 完全启动并创建好表结构后，本服务才能启动
+- **加密方式**：必须与 TeslaMate 的加密/解密方式完全一致
 
-**方案一：直接使用 TeslaMate 的 token 存储**
-- 查看 TeslaMate 的数据库表结构
-- 复用 TeslaMate 的 token 存储逻辑
-- 使用相同的 ENCRYPTION_KEY 进行加密/解密
+**实施步骤**：
+1. **查看 TeslaMate 表结构**
+   - 连接到 TeslaMate 的 PostgreSQL 数据库
+   - 使用 `\dt` 查看所有表
+   - 使用 `\d+ [表名]` 查看具体的 token 相关表结构
+   - 找到 TeslaMate 存储 access_token 和 refresh_token 的具体表和字段
 
-**方案二：创建独立的 token 表**
-```sql
--- 如果需要独立管理，创建新表
-CREATE TABLE IF NOT EXISTS api_tokens (
-    id SERIAL PRIMARY KEY,
-    access_token TEXT NOT NULL,      -- 加密存储
-    refresh_token TEXT NOT NULL,     -- 加密存储
-    validated_at TIMESTAMP NOT NULL,
-    expires_at TIMESTAMP,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+2. **复用 TeslaMate 的加密逻辑**
+   - 使用相同的 `ENCRYPTION_KEY` 环境变量
+   - 研究 TeslaMate 源码，确认其使用的加密算法（可能是 AES）
+   - 实现相同的加密/解密函数
 
--- 审计日志表（可选）
-CREATE TABLE IF NOT EXISTS token_validation_logs (
-    id SERIAL PRIMARY KEY,
-    access_token_hash VARCHAR(64),
-    valid BOOLEAN NOT NULL,
-    error_message TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
+3. **数据库操作**
+   - 只进行 SELECT/UPDATE 操作，不创建新表
+   - 直接读写 TeslaMate 的 token 表
 
-**注意**：
-- 必须使用与 TeslaMate 相同的 ENCRYPTION_KEY
-- 确保加密方式与 TeslaMate 兼容
-- 建议先调研 TeslaMate 的具体实现再决定
+**注意事项**：
+- 本服务必须在 docker-compose 中设置 `depends_on: teslamate`
+- 可能需要添加健康检查，确保 TeslaMate 数据库表已创建
+- 加密算法必须与 TeslaMate 完全一致，否则无法正确解密
 
 ## 五、Tesla API 集成
 
@@ -272,24 +268,60 @@ GIN_MODE=release
 
 ## 十、与 TeslaMate 集成
 
-1. **数据库共享**：
-   - 使用 TeslaMate 的 PostgreSQL 实例
-   - 复用 TeslaMate 的数据库连接配置
-   - 查看并使用 TeslaMate 现有的 token 存储机制
+### 10.1 启动顺序
+```yaml
+# docker-compose.yml 示例
+services:
+  token-service:
+    depends_on:
+      teslamate:
+        condition: service_healthy
+    environment:
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}  # 必须与 TeslaMate 相同
+```
 
-2. **TeslaMate 调用流程**：
-   - 用户获取 token（通过第三方工具）
-   - 调用本服务保存 token（自动验证）
-   - TeslaMate 从数据库读取已验证的 token
+### 10.2 数据库集成
+1. **表结构发现**：
+   - 服务启动后，先查询 TeslaMate 的表结构
+   - 找到存储 token 的表和字段名
+   - 动态适配 TeslaMate 的数据结构
+
+2. **加密兼容性**：
+   - 使用相同的 ENCRYPTION_KEY
+   - 实现与 TeslaMate 相同的加密/解密算法
+   - 测试确保能正确解密 TeslaMate 存储的 token
+
+3. **操作限制**：
+   - 只进行 SELECT/UPDATE 操作
+   - 不修改表结构
+   - 不删除已有数据
+
+### 10.3 实现建议
+1. **先研究 TeslaMate 源码**：
+   - 查看 Elixir 代码中的加密实现
+   - 确认具体的加密算法和参数
+   - 在 Go 中实现相同的算法
+
+2. **健康检查**：
+   - 检查数据库连接
+   - 验证 token 表是否存在
+   - 测试加密/解密功能
 
 3. **失败处理**：
-   - 如果 token 无效，用户需要重新获取
-   - 本服务只存储有效的 token
+   - 如果 token 无效，返回明确错误
+   - 如果无法解密，提示检查 ENCRYPTION_KEY
+   - 记录详细日志便于排查
 
 ---
 
-**关键点**：
+**关键点总结**：
 - ✅ 保存前必须验证 token 有效性
 - ✅ 只有通过 Tesla API 验证的 token 才能保存
-- ✅ 提供清晰的错误信息帮助用户排查问题
-- ✅ 安全地存储和处理 token
+- ✅ 不创建新表，完全复用 TeslaMate 的表结构
+- ✅ 使用与 TeslaMate 相同的加密方式（ENCRYPTION_KEY）
+- ✅ 必须在 TeslaMate 启动后才能启动本服务
+
+**开发前必做**：
+1. 查看 TeslaMate 的数据库表结构
+2. 研究 TeslaMate 的加密算法实现
+3. 确保加密/解密与 TeslaMate 完全兼容
