@@ -135,17 +135,30 @@ func SaveTokenHandler(c *gin.Context) {
 
 ### 4.3 数据库使用
 
-**使用 TeslaMate 现有的数据库**，查看 TeslaMate 的 tokens 表结构并复用：
+**重要**：TeslaMate 使用加密方式存储 token，我们的服务应该与 TeslaMate 的存储方式保持一致。
 
+**方案一：直接使用 TeslaMate 的 token 存储**
+- 查看 TeslaMate 的数据库表结构
+- 复用 TeslaMate 的 token 存储逻辑
+- 使用相同的 ENCRYPTION_KEY 进行加密/解密
+
+**方案二：创建独立的 token 表**
 ```sql
--- TeslaMate 已有的 tokens 表（示例，需要确认实际结构）
--- 直接使用 TeslaMate 的 tokens 表存储
--- 如果 TeslaMate 没有专门的 tokens 表，可以在同一个数据库中创建新表
+-- 如果需要独立管理，创建新表
+CREATE TABLE IF NOT EXISTS api_tokens (
+    id SERIAL PRIMARY KEY,
+    access_token TEXT NOT NULL,      -- 加密存储
+    refresh_token TEXT NOT NULL,     -- 加密存储
+    validated_at TIMESTAMP NOT NULL,
+    expires_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
--- 只需要创建一个简单的审计日志表（可选）
+-- 审计日志表（可选）
 CREATE TABLE IF NOT EXISTS token_validation_logs (
     id SERIAL PRIMARY KEY,
-    access_token_hash VARCHAR(64),   -- token 的 hash 值，不存储原文
+    access_token_hash VARCHAR(64),
     valid BOOLEAN NOT NULL,
     error_message TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -153,9 +166,9 @@ CREATE TABLE IF NOT EXISTS token_validation_logs (
 ```
 
 **注意**：
-- 连接到 TeslaMate 的 PostgreSQL 数据库
-- 查看 TeslaMate 现有的表结构，优先复用
-- 如果需要新表，使用不冲突的表名
+- 必须使用与 TeslaMate 相同的 ENCRYPTION_KEY
+- 确保加密方式与 TeslaMate 兼容
+- 建议先调研 TeslaMate 的具体实现再决定
 
 ## 五、Tesla API 集成
 
