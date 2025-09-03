@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  tesla-token-service:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DEBUG=false
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8080
+      - DB_HOST=mysql
+      - DB_USER=tesla_user
+      - DB_PASSWORD=tesla_password
+      - DB_NAME=tesla_tokens
+      - JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
+      - JWT_TTL=86400
+      - TESLA_BASE_URL=https://owner-api.teslamotors.com
+      - TESLA_TIMEOUT=30
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - tesla-network
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=tesla_tokens
+      - MYSQL_USER=tesla_user
+      - MYSQL_PASSWORD=tesla_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    restart: unless-stopped
+    networks:
+      - tesla-network
+
+  # Redis (可选，用于缓存和速率限制)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - tesla-network
+
+volumes:
+  mysql_data:
+  redis_data:
+
+networks:
+  tesla-network:
+    driver: bridge
